@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "dev": "npx vuepress dev docs",
+    "build": "npx vuepress build docs",
+    "remove-catch": "npx vuepress dev docs --no-cache"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress": "^1.2.0"
+  }
 }

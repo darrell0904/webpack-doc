@@ -1,6 +1,6 @@
 module.exports = {
   dest: 'dist',
-  title: 'Hello Webpack ccc',
+  title: 'Hello Webpack',
   themeConfig: {
     editLinks: false,
     // 假如文档不是放在仓库的根目录下：

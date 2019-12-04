@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /logo.png
+heroImage: /webpack.png
 actionText: 开始学习 →
 actionLink: /chapter1/
 ---

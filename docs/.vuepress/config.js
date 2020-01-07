@@ -16,7 +16,7 @@ module.exports = {
         title: '初识 Webpack',
         collapsable: false,
         children: [
-          ['chapter1/', 'Introduction'],
+          ['chapter1/', '前端的发展'],
           'chapter1/install',
           'chapter1/start'
         ]

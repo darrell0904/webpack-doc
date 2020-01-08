@@ -20,7 +20,8 @@ module.exports = {
           'chapter0/frame',
           'chapter0/language',
           'chapter0/install',
-          'chapter0/start'
+          'chapter0/start',
+          'chapter0/supplement',
         ]
       },
     ],

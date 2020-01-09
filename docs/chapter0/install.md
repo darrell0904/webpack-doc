@@ -1,4 +1,4 @@
-# 安装 TypeScript
+# 常见的构建工具及对比
 
 命令行运行如下命令，全局安装 TypeScript：
 

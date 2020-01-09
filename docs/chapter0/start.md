@@ -67,7 +67,11 @@ npx webpack index.js
 
 首先我们要安装 Node 环境，因为webpack 是基于Node开发的模块打包工具。
 
-我们可以进入 [Node.js官网](https://nodejs.org/en/) 下载所需的Node 版本，我们安装最新版本的稳定版本，也就是 `12.4.1 LTS` 这个版本的 Node.js， 因为新版本的 Node.js 会极大程度的提高webpack的打包速度，webpack 的文档里也说，提升webpack 打包速度的有两个非常重要的点，一个是保持 Node.js 版本尽量的新，一个是保持 webpack 版本尽量的新，高版本的webpack 会利用 Node 新版本中的特性来提高其打包速度。webpack  的作者也提到过，在某些项目中，最新版的webpack 会比 webpack3.0 打包速度 提升 90% 以上。
+我们可以进入 [Node.js官网](https://nodejs.org/en/) 下载所需的Node 版本，
+
+![](./img/node.png)
+
+我们安装最新版本的稳定版本，也就是 `12.4.1 LTS` 这个版本的 Node.js， 因为新版本的 Node.js 会极大程度的提高webpack的打包速度，webpack 的文档里也说，提升webpack 打包速度的有两个非常重要的点，一个是保持 Node.js 版本尽量的新，一个是保持 webpack 版本尽量的新，高版本的webpack 会利用 Node 新版本中的特性来提高其打包速度。webpack  的作者也提到过，在某些项目中，最新版的webpack 会比 webpack3.0 打包速度 提升 90% 以上。
 
 安装完成之后，在命令行里面输入：
 
@@ -78,6 +82,8 @@ npm -v // npm 的版本号
 ```
 
  如果上面的命令都输出了相应的版本号，那么就说明，你的Node.js环境已经安装好了。
+
+![](./img/node2.png)
 
 接下来我们在桌面新建一个 `webpack-demo` 文件：
 

@@ -364,4 +364,4 @@ mode: 'production',
 
 ![](./img/1.png)
 
-源码在这个仓库：webpack-study-demo
+源码在此：[webpack-demo](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter0/webpack-demo)

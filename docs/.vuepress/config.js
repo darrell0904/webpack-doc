@@ -30,6 +30,7 @@ module.exports = {
         children: [
           ['chapter1/', 'Webpack 配置'],
           'chapter1/loaders.md',
+          'chapter1/plugins.md',
         ]
       },
     ],

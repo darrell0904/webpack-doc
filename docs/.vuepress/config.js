@@ -29,8 +29,10 @@ module.exports = {
         collapsable: false,
         children: [
           ['chapter1/', 'Webpack 配置'],
+          'chapter1/entry_output.md',
           'chapter1/loaders.md',
           'chapter1/plugins.md',
+          'chapter1/sourcemap.md',
         ]
       },
     ],

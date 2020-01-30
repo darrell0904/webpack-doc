@@ -1,0 +1,55 @@
+## 安装运行
+
+```nginx
+# clone 项目
+git clone git@github.com:darrell0904/webpack-doc.git
+
+# 安装依赖
+npm install
+
+# 启动项目
+npm run dev
+```
+
+&nbsp;
+
+## 写文档的原因
+
+因为现在对于 `webpack` 的配置了解的不够全名，比较碎片话，同时有些很新的概念一直都没有应用。
+
+这是我写这个文档原因，让自己更加系统全面的掌握 `webpack` ，毕竟 `webpack 5.0` 快要来了。
+
+
+
+> 此篇文档的 `webpack` 的版本是 `4.0`
+
+&nbsp;
+## 项目截图
+
+![](./images/webpack1.png)
+
+![](./images/webpack2.png)
+
+
+&nbsp;
+
+## 项目系列文章
+
+
+
+### 初识 `webpack`
+
+* [前端的发展](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/README.md)
+* [新框架](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/frame.md)
+* [新语言](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/language.md)
+* [常见的构建工具及对比](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/install.md)
+* [安装webpack](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/start.md)
+* [一些补充](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/supplement.md)
+
+### Webpack 核心概念
+
+* [Webpack 的配置参数](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/README.md)
+* [配置 entry 和 output](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/entry_output.md)
+* [配置 loader](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/loaders.md)
+* [配置 plugin](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/plugins.md)
+* [配置 sourceMap](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/sourcemap.md)

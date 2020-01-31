@@ -24,6 +24,47 @@ npm run dev
 > 此篇文档的 `webpack` 的版本是 `4.0`
 
 &nbsp;
+## `github` 图片出不来？
+
+* 首先打开 `host` 文件
+
+```nginx
+sudo vi /etc/hosts
+```
+
+* 接着添加以下内容
+
+```nginx
+# GitHub Start
+
+192.30.253.112    github.com
+192.30.253.119    gist.github.com
+199.232.28.133    assets-cdn.github.com
+199.232.28.133    raw.githubusercontent.com
+199.232.28.133    gist.githubusercontent.com
+199.232.28.133    cloud.githubusercontent.com
+199.232.28.133    camo.githubusercontent.com
+199.232.28.133    avatars0.githubusercontent.com
+199.232.28.133    avatars1.githubusercontent.com
+199.232.28.133    avatars2.githubusercontent.com
+199.232.28.133    avatars3.githubusercontent.com
+199.232.28.133    avatars4.githubusercontent.com
+199.232.28.133    avatars5.githubusercontent.com
+199.232.28.133    avatars6.githubusercontent.com
+199.232.28.133    avatars7.githubusercontent.com
+199.232.28.133    avatars8.githubusercontent.com
+
+# GitHub End
+```
+
+* 保存，退出，重新刷新 `github` 页面
+
+
+
+> 具体原因大家可以参考这篇文章：[解决github图片不显示的问题](https://blog.csdn.net/qq_38232598/article/details/91346392)
+
+
+
 ## 项目截图
 
 ![](./images/webpack1.png)

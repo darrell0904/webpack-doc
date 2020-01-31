@@ -26,13 +26,35 @@ module.exports = {
       },
       {
         title: 'Webpack 核心概念',
-        collapsable: false,
+        collapsable: true,
         children: [
           ['chapter1/', 'Webpack 配置'],
           'chapter1/entry_output.md',
           'chapter1/loaders.md',
           'chapter1/plugins.md',
           'chapter1/sourcemap.md',
+          'chapter1/webpack_dev_server.md',
+          'chapter1/hot_module_replacement.md',
+          'chapter1/webpack_babel.md',
+          'chapter1/webapck_react.md',
+        ]
+      },
+      {
+        title: 'Webpack 高级概念',
+        collapsable: true,
+        children: [
+          ['chapter2/', 'Webpack 高级概念'],
+          'chapter2/tree_shaking.md',
+          'chapter2/mode.md',
+          'chapter2/code_splitting.md',
+          'chapter2/split_chunks_plugin.md',
+          'chapter2/lazy_loading.md',
+          'chapter2/analysis.md',
+          'chapter2/css_splitting.md',
+          'chapter2/caching.md',
+          'chapter2/shimming.md',
+          'chapter2/split_chunks_plugin.md',
+          'chapter2/env.md',
         ]
       },
     ],

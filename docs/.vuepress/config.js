@@ -57,6 +57,20 @@ module.exports = {
           'chapter2/env.md',
         ]
       },
+      {
+        title: 'Webpack 实战配置案例',
+        collapsable: true,
+        children: [
+          ['chapter3/', 'Webpack 实战配置案例'],
+          'chapter3/library.md',
+          'chapter3/pwd.md',
+          'chapter3/typescript.md',
+          'chapter3/webpack_dev_server.md',
+          'chapter3/esLint.md',
+          'chapter3/performance.md',
+          'chapter3/more_page.md',
+        ]
+      },
     ],
   }
 }

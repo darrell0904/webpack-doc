@@ -253,8 +253,12 @@ module.exports = merge(commonConfig, prodConfig);
   * `npm run dev`：开发环境打包
   * `npm run build`：生产环境打包
 
+## 相关链接
 
 
-到这里我们就讲完了 `webpack` 的环境区分打包，具体代码可以看这里：
+
+## 示例代码
+
+示例代码可以看这里：
 
 * [Develoment 和 Production 模式的区分打包 实例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter2/webpack-build-mode)

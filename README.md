@@ -11,6 +11,10 @@ npm install
 npm run dev
 ```
 
+
+
+&nbsp;
+
 &nbsp;
 
 ## 写文档的原因
@@ -24,6 +28,11 @@ npm run dev
 > 此篇文档的 `webpack` 的版本是 `4.0`
 
 &nbsp;
+
+&nbsp;
+
+&nbsp;
+
 ## `github` 图片出不来？
 
 * 首先打开 `host` 文件
@@ -65,6 +74,10 @@ sudo vi /etc/hosts
 
 
 
+&nbsp;
+
+&nbsp;
+
 ## 项目截图
 
 ![](./images/webpack1.png)
@@ -74,23 +87,75 @@ sudo vi /etc/hosts
 
 &nbsp;
 
-## 项目系列文章
+&nbsp;
+
+&nbsp;
+
+## 项目文章目录
 
 
 
-### 初识 `webpack`
+### 初识 Webpack
 
 * [前端的发展](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/README.md)
 * [新框架](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/frame.md)
 * [新语言](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/language.md)
-* [常见的构建工具及对比](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/install.md)
+* 常见的构建工具及对比
 * [安装webpack](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/start.md)
 * [一些补充](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/supplement.md)
 
 ### Webpack 核心概念
 
-* [Webpack 的配置参数](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/README.md)
+* [webpack 的配置参数](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/README.md)
 * [配置 entry 和 output](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/entry_output.md)
 * [配置 loader](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/loaders.md)
 * [配置 plugin](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/plugins.md)
 * [配置 sourceMap](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/sourcemap.md)
+* [配置 webpack-dev-derver](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/webpack_dev_server.md)
+* [配置 HMR 热更新](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/hot_module_replacement.md)
+* [打包 ES6 代码](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/webpack_babel.md)
+* [打包 React 代码](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/webapck_react.md)
+
+### Webpack 高级概念
+
+* webpack 的高级概念
+* [配置 Tree Shaking](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/tree_shaking.md)
+* [Develoment 和 Production 模式的区分打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/mode.md)
+* [Webpack 和 Code Splitting](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/code_splitting.md)
+* [配置 SplitChunksPlugin](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/split_chunks_plugin.md)
+* 配置 Lazy Loading （懒加载）
+* 打包分析 （Preloading、Prefetching）
+* CSS 文件的代码分割
+* Webpack 与浏览器缓存（Caching）
+* Shimming 的作用
+* 环境变量的使用
+
+
+
+### Webpack 实战配置案例
+
+* Webpack 实战配置案例
+* [Library 打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/library.md)
+* PWA 打包
+* TypeScript 打包
+* webpack-dev-server 高级配置
+* 配置 EsLint
+* Webpack 性能优化
+* Webpack 多页面打包
+
+
+
+### 未完待续。。。
+
+&nbsp;
+
+&nbsp;
+
+## 参考资料
+
+这里列举了笔者学习 `webpack` 的主要来源，其余的参考资料我会再每一节发出来。
+
+* [从基础到实战 手把手带你掌握新版Webpack4.0（慕课网 ）](https://coding.imooc.com/class/316.html)
+* [玩转webpack（极客时间 ）](https://time.geekbang.org/course/intro/190)
+* [深入浅出 webpack（书籍 ）](https://webpack.wuhaolin.cn/)
+* [使用 webpack 定制前端开发环境（掘金）](https://juejin.im/book/5a6abad5518825733c144469)

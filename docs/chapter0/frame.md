@@ -27,8 +27,8 @@ Vue 框架是以`.vue` 结尾的文件，这个文件里面包括了 组件相�
 <template>
 	<!-- HTML 模版 -->
 	<div class="example">
-        {{msg}}
-    </div>
+		{{msg}}
+	</div>
 	<!-- Javascript 逻辑 -->
 	<script>
         export default {

@@ -1,6 +1,6 @@
 # 配置 sourceMap
 
-## 什么是 `sourceMap`
+## 什么是 sourceMap
 
 `SourceMap` 是一个映射关系。能够帮我们更好的定位源码的错误。
 
@@ -8,7 +8,9 @@
 
 
 
-## 如何配置 `sourceMap`
+&nbsp;
+
+## 如何配置 sourceMap
 
 首先我们在修改一下 `webpack.config.js` 文件，添加参数 `devtool` 并且设置为 `none`，因为 webpack 默认会帮我们 把 sourceMap 给开起来，为了验证它的作用，我们暂时先把它关闭。
 
@@ -63,6 +65,8 @@ devtool: 'source-map',
 
 
 
+&nbsp;
+
 ## devtool 的 相关配置
 
 下面是官网给我们的 `devtool` 的相关配置的比较：
@@ -91,6 +95,8 @@ devtool: 'source-map',
 
 
 
+&nbsp;
+
 ## 项目开发的最佳实践
 
 开发环境下：`development`
@@ -115,12 +121,30 @@ devtool: 'cheap-module-source-map'
 
 
 
+&nbsp;
+
 ## 解析 source-map 文件 
 
 
+
+&nbsp;
 
 ## source-map 原理
 
 
 
-更多配置大家可以参考官网的 [devtool](https://webpack.js.org/configuration/devtool/) 。
+
+
+&nbsp;
+
+## 相关链接
+
+- [官网 devtool](https://webpack.js.org/configuration/devtool/)
+
+
+
+## 示例代码
+
+示例代码可以看这里：
+
+- [source map 示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter1/sourceMap-demo)

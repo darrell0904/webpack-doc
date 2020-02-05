@@ -6,7 +6,7 @@
 
 比如在 **开发环境** 中我们需要 `webpack-dev-server` 来帮我们进行快速的开发，同时需要 **HMR** 热更新帮我们进行页面的无刷新改动。而这些在我们的 **生产环境** 中都是不需要的。
 
-
+&nbsp;
 
 ## 思路
 
@@ -17,7 +17,7 @@
 
 我们可以通过 `webpack-merge` 来整合两个配置文件共同的配置 `webpack.common.js`
 
-
+&nbsp;
 
 ##  具体操作
 
@@ -253,12 +253,17 @@ module.exports = merge(commonConfig, prodConfig);
   * `npm run dev`：开发环境打包
   * `npm run build`：生产环境打包
 
+&nbsp;
+
 ## 相关链接
 
 
+
+&nbsp;
 
 ## 示例代码
 
 示例代码可以看这里：
 
 * [Develoment 和 Production 模式的区分打包 实例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter2/webpack-build-mode)
+

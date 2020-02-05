@@ -2,7 +2,7 @@
 
 ## entry
 
-entry 是 webpack 开始打包的入口文件，从这个入口文件开始，应用程序启动执行。如果传递一个数组，那么数组的每一项都会执行。
+`entry` 是 `webpack` 开始打包的入口文件，从这个入口文件开始，应用程序启动执行。如果传递一个数组，那么数组的每一项都会执行。
 
 `entry` 可以传入一个字符串或者一个字符串数组：
 
@@ -22,7 +22,7 @@ entry: ['./src/index.js', './src/index2.js'],
 ...
 ```
 
- 如果在 output 选项里面没有配置 `filename` 选项名字的话，chunk 会被命名为 `main`，即生成 `main.js`。
+ 如果在 `output` 选项里面没有配置 `filename` 选项名字的话，chunk 会被命名为 `main`，即生成 `main.js`。
 
 其实上面的写法，实际上就是下面的简写：
 
@@ -62,6 +62,8 @@ entry: {
 
 
 
+&nbsp;
+
 ## output
 
 output 的配置必须是一个对象，它指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。 
@@ -72,8 +74,8 @@ output 的配置必须是一个对象，它指示 webpack 如何去输出、以�
 // 最基础的单页面 output 应用配置
 ...
 output: {
-    filename: 'main.js',
-	path: path.resolve(__dirname, 'dist')
+  filename: 'main.js',
+  path: path.resolve(__dirname, 'dist')
 }
 ...
 ```
@@ -85,13 +87,13 @@ output: {
 ```js
 ...
 entry: {
-    main: './src/index.js',
-	sub: './src/index2.js',
+  main: './src/index.js',
+  sub: './src/index2.js',
 },
 
 output: {
-	filename: '[name].js',
-	path: path.resolve('./dist'),
+  filename: '[name].js',
+  path: path.resolve('./dist'),
 }
 ...
 ```
@@ -109,9 +111,9 @@ filename 还有其他的占位符，如下：
 ```js
 ...
 output: {
-    publicPath: 'http://cdn.com.cn',
-	filename: 'main.js',
-	path: path.resolve(__dirname, 'dist')
+  publicPath: 'http://cdn.com.cn',
+  filename: 'main.js',
+  path: path.resolve(__dirname, 'dist')
 }
 ...
 ```
@@ -122,8 +124,21 @@ output: {
 
 
 
-这一节的内容相对来说比较简单，更多配置大家可以参考官网：
 
-* [entry](https://webpack.js.org/configuration/entry-context/)
-* [output](https://webpack.js.org/configuration/output/)
 
+&nbsp;
+
+## 相关链接
+
+- [官网 entry](https://webpack.js.org/configuration/entry-context/)
+- [官网 output](https://webpack.js.org/configuration/output/)
+
+
+
+&nbsp;
+
+## 示例代码
+
+示例代码可以看这里：
+
+- [enrty 和 output 示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter1/entryOutput-demo)

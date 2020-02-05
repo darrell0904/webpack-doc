@@ -1,16 +1,22 @@
-# SplitChunksPlugin 配置参数详解
+# 配置 SplitChunksPlugin
 
 `webpack`  之所以能够进行代码分割，原因是它内部集成了 `SplitChunksPlugin` 插件，它能够非常方便的帮我们进行代码分割。
+
+&nbsp;
 
 ## `webpack-bundle-analyzer`
 
 此依赖是方便我们查看打包内容的的可视化分析工具。
+
+&nbsp;
 
 ### 安装依赖
 
 ```javascript
 npm install webpack-bundle-analyzer -D
 ```
+
+&nbsp;
 
 ### 配置
 
@@ -23,13 +29,13 @@ module.exports = {
   ...
   plugins: [
     ...
-		new BundleAnalyzerPlugin({
-			analyzerHost: '127.0.0.1',
-			analyzerPort: 8889,
-			openAnalyzer: false,
-		}),
+    new BundleAnalyzerPlugin({
+      analyzerHost: '127.0.0.1',
+      analyzerPort: 8889,
+      openAnalyzer: false,
+    }),
     ...
-	],
+  ],
   ...
 }
 ```
@@ -38,10 +44,12 @@ module.exports = {
 
 ```json
 ...
+
 "scripts": {
   ...
   "analyz": "NODE_ENV=production npm_config_report=true npm run build"
 },
+
 ...
 ```
 
@@ -61,7 +69,7 @@ module.exports = {
 
 
 
-
+&nbsp;
 
 ## 给异步模块命名
 
@@ -73,10 +81,10 @@ module.exports = {
 
 ```javascript
 const getComponent = async () => {
-	const { default: _ } = await import(/* webpackChunkName:"lodash" */ 'lodash');
-	const element = document.createElement('div');
-	element.innerHTML = _.join(['Hello', 'Darrell'], '-');
-	return element;
+  const { default: _ } = await import(/* webpackChunkName:"lodash" */ 'lodash');
+  const element = document.createElement('div');
+  element.innerHTML = _.join(['Hello', 'Darrell'], '-');
+  return element;
 }
 
 export default getComponent;
@@ -94,16 +102,18 @@ export default getComponent;
 // webpack.common.js
 
 ...
+
 // 配置属性
 optimization: {
-    splitChunks: {
-        chunks: "all",
-        cacheGroups: {
-            vendors: false,
-            default: false,
-        }
+  splitChunks: {
+    chunks: "all",
+    cacheGroups: {
+      vendors: false,
+      default: false,
     }
+  }
 },
+
 ...
 ```
 
@@ -118,6 +128,8 @@ optimization: {
 `optimization` 下的 `splitChunks` 有相当多的配置参数，接下来我们来讲一波。
 
 
+
+&nbsp;
 
 ## 官方默认配置
 
@@ -134,28 +146,30 @@ optimization: {
 
 ```javascript
 splitChunks: {
-    chunks: "async", // 必须三选一： "initial" | "all"(推荐) | "async" (默认就是async)
-    minSize: 30000, // 最小尺寸，30000
-    minChunks: 1, // 最小 chunk ，默认1
-    maxAsyncRequests: 5, // 最大异步请求数， 默认5
-    maxInitialRequests: 3, // 最大初始化请求书，默认3
-    automaticNameDelimiter: '~', // 打包分隔符
-    name: true, // 打包后的名称，此选项可接收 function
-    cacheGroups: {   // 这里开始设置缓存的 chunks ，缓存组
-        vendors: {
-            test: /[\\/]node_modules[\\/]/,
-            priority: -10,
-        },
-        default: {
-            minChunks: 2,
-            priority: -20,
-            reuseExistingChunk: true, // 可设置是否重用该chunk
-        }
+  chunks: "async", // "initial" | "all"(推荐) | "async" (默认就是async) | 函数
+  minSize: 30000,              // 最小尺寸，30000
+  minChunks: 1,                // 最小 chunk ，默认1
+  maxAsyncRequests: 5,         // 最大异步请求数， 默认5
+  maxInitialRequests: 3,       // 最大初始化请求书，默认3
+  automaticNameDelimiter: '~', // 打包分隔符
+  name: true,       // 打包后的名称，此选项可接收 function
+  cacheGroups: {   // 这里开始设置缓存的 chunks ，缓存组
+    vendors: {
+      test: /[\\/]node_modules[\\/]/,
+      priority: -10,
+    },
+    default: {
+      minChunks: 2,
+      priority: -20,
+      reuseExistingChunk: true, // 可设置是否重用该chunk
     }
+  }
 }
 ```
 
 
+
+&nbsp;
 
 ## 新建测试代码
 
@@ -163,16 +177,16 @@ splitChunks: {
 
 ```javascript
 .
-├── src    	// 录
-    ├── module 	// 模块
-        ├── module-1.js
-    		├── module-a.js
-        ├── module-b.js
-        ├── module-c.js
-        └── module-d.js
-    ├── entey1.js  // 工具函数目录
-    ├── entey2.js  // typescripe 的接口定义
-    └── entey3.js   // 样式文件目录
+├─ src    	  // 目录
+   ├─ module 	// 模块
+      ├─ module-1.js
+      ├─ module-a.js
+      ├─ module-b.js
+      ├─ module-c.js
+      └─ module-d.js
+   ├─ entey1.js   // 工具函数目录
+   ├─ entey2.js   // typescripe 的接口定义
+   └─ entey3.js   // 样式文件目录
 ```
 
 ### `entry1.js`
@@ -183,11 +197,11 @@ import classB from './modules/module-b';
 import classC from './modules/module-c';
 
 let engligh = {
-    teacher: 'english', age: 47
+  teacher: 'english', age: 47
 };
 
 import( /* webpackChunkName: "async-class-a" */  './modules/module-a').then(classA =>{
-    classA.push(engligh);
+  classA.push(engligh);
 });
 
 classB.push(engligh);
@@ -202,11 +216,11 @@ import classB from './modules/module-b';
 import classC from './modules/module-c';
 
 let math = {
-    teacher: 'math', age: 47
+  teacher: 'math', age: 47
 };
 
 import(/* webpackChunkName: "async-class-a" */  './modules/module-a').then(classA =>{
-    classA.push(engligh);
+  classA.push(engligh);
 });
 
 classB.push(math);
@@ -220,16 +234,16 @@ classC.push(math);
 import classC from './modules/module-c';
 
 let engligh = {
-    teacher: 'english', age: 47
+  teacher: 'english', age: 47
 };
 
 
 import(/* webpackChunkName: "async-class-a" */ './modules/module-a').then(classA =>{
-    classA.push(engligh);
+  classA.push(engligh);
 });
 
 import(/* webpackChunkName: "async-class-b" */ './modules/module-b').then(classB =>{
-    classB.push(engligh);
+  classB.push(engligh);
 });
 
 classC.push(engligh);
@@ -314,19 +328,19 @@ export default [
 ...
 
 module.exports = {
-	entry: {
-		entry1: "./src/entry1.js",
-		entry2: "./src/entry2.js",
-		entry3: "./src/entry3.js",
-	},
+  entry: {
+    entry1: "./src/entry1.js",
+    entry2: "./src/entry2.js",
+    entry3: "./src/entry3.js",
+  },
   ...
   optimization: {
-		splitChunks: {
-			chunks: 'all',
-			minSize: 0, // 对所有大小的模块 都进行拆分
-			automaticNameDelimiter: '~',
-		},
-	},
+    splitChunks: {
+      chunks: 'all',
+      minSize: 0,  // 对所有大小的模块 都进行拆分
+      automaticNameDelimiter: '~',
+    },
+  },
   ...
 }
 
@@ -334,7 +348,7 @@ module.exports = {
 
 
 
-
+&nbsp;
 
 ## 配置介绍
 
@@ -373,7 +387,7 @@ module.exports = {
 
 ```javascript
 import(/* webpackChunkName: "async-module-b" */ './modules/module-b').then(classB =>{
-    classB.push(engligh);
+  classB.push(engligh);
 });
 ```
 
@@ -537,7 +551,7 @@ import classA from './modules/module-a';
 import classC from './modules/module-c';
 
 let engligh = {
-    teacher: 'english', age: 47
+  teacher: 'english', age: 47
 };
 
 classA.push(engligh);
@@ -548,7 +562,7 @@ import classA from './modules/module-a';
 import classB from './modules/module-b';
 
 let math = {
-    teacher: 'math', age: 47
+  teacher: 'math', age: 47
 };
 
 classA.push(math);
@@ -559,7 +573,7 @@ import classC from './modules/module-c';
 import classB from './modules/module-b';
 
 let chinese = {
-    teacher: 'chinese', age: 47
+  teacher: 'chinese', age: 47
 };
 
 classB.push(chinese);
@@ -650,8 +664,7 @@ classC.push(chinese);
 > 缓存组也有默认的配置；
 >
 > * 缓存组默认将 `node_modules` 中的模块拆分带一个叫做 `vendors` 的代码块中。
-> 
->   * 将最少重复引用两次的模块放入 `default`中。
+> * 将最少重复引用两次的模块放入 `default`中。
 
 
 
@@ -697,7 +710,7 @@ cacheGroups: {
 
 
 
-
+&nbsp;
 
 ## 相关链接
 
@@ -706,10 +719,11 @@ cacheGroups: {
 - [一步一步的了解 webpack4 的splitChunk插件](https://juejin.im/post/5af1677c6fb9a07ab508dabb)
 - [webpack v4 中的断舍离 - 代码分离 SplitChunksPlugin](https://juejin.im/post/5b6a4d71f265da0fa8676814)
 
-
+&nbsp;
 
 ## 示例代码
 
 示例代码可以看这里：
 
-- [SplitChunksPlugin  示例代码]()
+- [SplitChunksPlugin  示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter2/split-chunks-plugin-demo)
+

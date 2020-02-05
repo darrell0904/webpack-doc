@@ -8,7 +8,7 @@
 
 接下去我们就来讲一下：
 
-
+&nbsp;
 
 ## 安装与配置
 
@@ -45,7 +45,7 @@ devServer: {
 
 ![](./img/webpack-dev-server1.png)
 
-
+&nbsp;
 
 ## 常用配置
 
@@ -118,15 +118,15 @@ module.exports = {
 
 ```javascript
 module.exports = {
-    //...
-    devServer: {
-        proxy: {
-            '/api': {
-                target: 'https://other-server.example.com',
-                secure: false
-            }
-        }
+  //...
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'https://other-server.example.com',
+        secure: false
+      }
     }
+  }
 };
 ```
 
@@ -247,6 +247,8 @@ historyApiFallback: {
 
 
 
+&nbsp;
+
 ## 实现一个简单的 webpack-dev-server
 
 因为 `webpack` 是基于 `node` 环境的，我们先在根目录下创建一个 `server.js`。
@@ -315,10 +317,10 @@ app.listen(3000, () => {
 
 ```javascript
 function Header() {
-	var dom = document.getElementById('root');
-	var header = document.createElement('div');
-	header.innerText = 'webpack-dev-server111';
-	dom.append(header);
+  var dom = document.getElementById('root');
+  var header = document.createElement('div');
+  header.innerText = 'webpack-dev-server111';
+  dom.append(header);
 }
 
 export default Header;
@@ -334,14 +336,17 @@ export default Header;
 
 
 
+&nbsp;
+
 ## 相关链接
 
-* [在命令行中使用 `webpack`](https://webpack.js.org/api/cli/#usage-with-config-file)
-* [在 `node` 中使用 `webpack`](https://webpack.js.org/api/node/#installation)
-
-* [`webpack` 开发流程](发展历程)
+* [在命令行中使用 webpack](https://webpack.js.org/api/cli/#usage-with-config-file)
+* [在 node 中使用 webpack](https://webpack.js.org/api/node/#installation)
 
 
+
+
+&nbsp;
 
 ## 示例代码
 

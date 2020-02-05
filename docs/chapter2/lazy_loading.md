@@ -1,1 +1,1 @@
-# Lazy Loading 懒加载，Chunk 是什么？
+# 配置 Lazy Loading （懒加载）

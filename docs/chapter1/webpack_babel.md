@@ -1,8 +1,8 @@
 # 打包 ES6 代码
 
-这一节我们讲一下使用 **`Babel`** 处理 `ES6` 的语法。
+这一节我们讲一下使用 `Babel` 处理 `ES6` 的语法。
 
-
+&nbsp;
 
 ## 举个🌰：
 
@@ -12,12 +12,12 @@
 // index.js
 
 const arr = [
-	new Promise(() => {}),
-	new Promise(() => {})
+  new Promise(() => {}),
+  new Promise(() => {})
 ];
 
 arr.map(item => {
-	console.log(item);
+  console.log(item);
 });
 ```
 
@@ -72,7 +72,7 @@ module: {
 ```javascript
 // .babelrc
 {
-	"presets": ["@babel/preset-env"]
+  "presets": ["@babel/preset-env"]
 }
 ```
 
@@ -85,6 +85,8 @@ module: {
 但是这里面还会有一个问题，就是我们会发现上述的打包出来的代码中还有 `promise` 和 `map` 函数还没有被转化，有些低版本浏览器还不支持这些方法，所以我们要加一些垫片。
 
 
+
+&nbsp;
 
 ## 兼容低版本浏览器（`@babel/polyfill`）
 
@@ -118,7 +120,7 @@ import "@babel/polyfill";
 
 ```json
 {
-	"presets": [
+  "presets": [
     [
       "@babel/preset-env",
       {
@@ -137,9 +139,9 @@ import "@babel/polyfill";
 
 同时我们还可以根据浏览器版本去告诉 `webpack` 是否要向打包的文件中注入一些兼容性的代码：
 
-```javascript
+```json
 {
-	"presets": [
+  "presets": [
     [
       "@babel/preset-env",
       {
@@ -159,6 +161,8 @@ import "@babel/polyfill";
 ![](./img/babel9.png)
 
 
+
+&nbsp;
 
 ## 打包类库
 
@@ -199,11 +203,20 @@ npm install @babel/runtime @babel/runtime-corejs2 -S
 
 
 
+&nbsp;
+
+## 相关链接
+
+* [babel 官网](https://www.babeljs.cn/)
+* [@babel/plugin-transform-runtime](https://www.babeljs.cn/docs/babel-plugin-transform-runtime)
+
+&nbsp;
+
 ## 示例代码
 
 示例代码可以看这里：
 
-* [打包 ES6 示例代码]()
+* [打包 ES6 示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter1/es6-demo)
 
 
 

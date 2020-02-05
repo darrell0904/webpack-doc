@@ -1,8 +1,8 @@
-# Webpack 和 Code Splitting
+# webpack 和 Code Splitting
 
-今天讲一下 `webpack` 中的代码分割，和 `webpack` 无关，为了提升性能webpack中实现代码分割，两种方式:
+今天讲一下 `webpack` 中的代码分割，和 `webpack` 无关，为了提升性能 `webpack` 中实现代码分割，两种方式:
 
-
+&nbsp;
 
 ## 举个🌰
 
@@ -57,11 +57,11 @@ console.log(_.join(['a', 'b', 'c'], '***'));
 ...
 
 module.exports = {
-	entry: {
-		lodash: './src/lodash.js',
-		main: './src/index.js',
-	},
-    ...
+  entry: {
+    lodash: './src/lodash.js',
+    main: './src/index.js',
+  },
+  ...
 }
 
 ...
@@ -97,11 +97,13 @@ module.exports = {
 
 这是我们自己手动做的，我们看看 `webpack` 如何帮我们做代码分割。
 
-
+&nbsp;
 
 ## 两种方式
 
-使用 `webpack` 帮我们做代码分割有两种方式
+使用 `webpack` 帮我们做代码分割有两种方式。
+
+&nbsp;
 
 ### 同步引入，分割代码： 
 
@@ -109,11 +111,13 @@ module.exports = {
 
 ```javascript
 ...
+
 optimization: {
-    splitChunks: {
-        chunks: 'all', // 公用的类库拆分，默认全部
-    }
+  splitChunks: {
+    chunks: 'all', // 公用的类库拆分，默认全部
+  }
 },
+
 ...
 ```
 
@@ -121,12 +125,14 @@ optimization: {
 
 ```javascript
 ...
+
 module.exports = {
-	entry: {
-		main: './src/index.js',
-	},
-    ...
+  entry: {
+    main: './src/index.js',
+  },
+  ...
 }
+
 ...
 ```
 
@@ -140,7 +146,7 @@ module.exports = {
 
 
 
-
+&nbsp;
 
 ### 异步引入，分割代码(import): 
 
@@ -150,11 +156,11 @@ module.exports = {
 
 ```javascript
 export default function getComponent() {
-	return import('lodash').then(({ default: _ }) => {
-		var element = document.createElement('div');
-		element.innerHTML = _.join(['Hello', 'Darrell'], '-');
-		return element;
-	})
+  return import('lodash').then(({ default: _ }) => {
+    var element = document.createElement('div');
+    element.innerHTML = _.join(['Hello', 'Darrell'], '-');
+    return element;
+  })
 }
 ```
 
@@ -190,16 +196,16 @@ npm i babel-plugin-dynamic-import-webpack -D
 
 ```json
 {
-    presets: [
-        [
-            "@babel/preset-env", 
-            {
-				useBuiltIns: 'usage'
-			}
-		],
-		"@babel/preset-react"
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        useBuiltIns: 'usage'
+      }
+    ],
+    "@babel/preset-react"
 	],
-	plugins: ["dynamic-import-webpack"]
+	"plugins": ["dynamic-import-webpack"]
 }
 ```
 
@@ -207,12 +213,16 @@ npm i babel-plugin-dynamic-import-webpack -D
 
 
 
+&nbsp;
+
 ## 相关链接：
 
 
+
+&nbsp;
 
 ## 示例代码
 
 示例代码可以看这里：
 
-* [code splitting 示例代码]()
+* [code splitting 示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter2/code-splitting-demo)

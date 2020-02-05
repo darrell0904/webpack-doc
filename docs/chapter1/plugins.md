@@ -1,6 +1,8 @@
 # 配置 plugin
 
-上一节我们讲了 loader，我们知道了在 webpack 中，loader 可以完成对不同类型文件的打包，这一节我们讲一下 plugins，让我们的打包变得更加便捷。
+上一节我们讲了 `loader`，我们知道了在 `webpack` 中，`loader` 可以完成对不同类型文件的打包，这一节我们讲一下 `plugins`，让我们的打包变得更加便捷。
+
+&nbsp;
 
 ## 什么是 plugin
 
@@ -15,6 +17,8 @@
 下面我们就来讲几个常用的 plugin 来了解一下插件的使用方法。
 
 
+
+&nbsp;
 
 ## html-webpack-plugin
 
@@ -39,7 +43,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 // 给 webpack 添加一项配置 plugins
 ...
 plugins: [
-    new htmlWebpackPlugin(),
+  new htmlWebpackPlugin(),
 ]
 ...
 ```
@@ -60,8 +64,8 @@ plugins: [
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>模块化问题例子</title>
+  <meta charset="UTF-8">
+  <title>模块化问题例子</title>
 </head>
 <body>
   <div id='root'></div>
@@ -75,9 +79,9 @@ plugins: [
 // 给 webpack 添加一项配置 plugins
 ...
 plugins: [
-    new htmlWebpackPlugin({
-        template: 'src/index.html', // 模板文件
-    }),
+  new htmlWebpackPlugin({
+    template: 'src/index.html', // 模板文件
+  }),
 ]
 ...
 ```
@@ -92,6 +96,8 @@ plugins: [
 
 
 
+&nbsp;
+
 ## clean-webpack-plugin
 
 这个插件能帮我们在打包之前先删除掉打包出来的文件夹，比如我们修改了 `webpack.config.js` 中的 `output` 选项：
@@ -99,8 +105,8 @@ plugins: [
 ```js
 ...
 output: {
-    filename: 'main.js',
-	path: path.resolve(__dirname, 'bundle')
+  filename: 'main.js',
+  path: path.resolve(__dirname, 'bundle')
 }
 ...
 ```
@@ -123,10 +129,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 ...
 plugins: [
-    new htmlWebpackPlugin({
-        template: 'src/index.html', // 模板文件
-    }),
-    new cleanWebpackPlugin(),
+  new htmlWebpackPlugin({
+    template: 'src/index.html', // 模板文件
+  }),
+  new cleanWebpackPlugin(),
 ]
 ...
 ```
@@ -148,3 +154,21 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 ```
 
 关于 `CleanWebpackPlugin` 的更多用法，可以参考官网的 [clean-webpack-plugin](https://www.npmjs.com/package/clean-webpack-plugin)
+
+
+
+&nbsp;
+
+## 相关链接
+
+- [官网 plugins](https://webpack.js.org/plugins/)
+
+
+
+&nbsp;
+
+## 示例代码
+
+示例代码可以看这里：
+
+- [plugins 示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter1/plugin-demo)

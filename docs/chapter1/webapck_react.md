@@ -2,7 +2,7 @@
 
 如今前端框架三足鼎立，`react` 是我们必须要学习的代码。这一节来讲一下如何打包 `react` 代码。
 
-
+&nbsp;
 
 ## 先写点 `react`
 
@@ -19,13 +19,13 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 
 class App extends Component {
-	render() {
-		return (
-			<div>
-				hello，React！！！
-			</div>
-		)
-	}
+  render() {
+    return (
+      <div>
+        hello，React！！！
+      </div>
+    )
+  }
 }
 
 ReactDom.render(<App />, document.getElementById('root'));
@@ -34,6 +34,8 @@ ReactDom.render(<App />, document.getElementById('root'));
 然后我们试着运行 `npm start`，打包报错了，想想肯定也是，因为我们没有在配置文件里面告诉 `webpack` 碰到 `react` 代码需要怎么打包。
 
 
+
+&nbsp;
 
 ## 配置 `babel`
 
@@ -63,7 +65,7 @@ npm install @babel/preset-react -D
 
 ![](./img/react1.png)
 
-
+&nbsp;
 
 ## 相关链接
 
@@ -71,9 +73,11 @@ npm install @babel/preset-react -D
 
 
 
+&nbsp;
+
 ## 示例代码
 
 示例代码可以看这里：
 
-* [打包 React  示例代码]()
+* [打包 React  示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter1/webpack-react-demo)
 

@@ -29,14 +29,14 @@
 // 定义模块 demo.js
 var num1 = 0;
 function add(a, b) {
-    return a + b;
+  return a + b;
 }
 
 // 暴露向外提供的函数或者变量
 
 module.exports = {
-    add: add,
-    num1: num1,
+  add: add,
+  num1: num1,
 }
 
 // 导入自定义的模块时，参数包含路径，可省略.js
@@ -128,17 +128,17 @@ $ node main.js
 ```javascript
 // 定义没有依赖的模块
 define(function(){
-   return 模块
+  return 模块
 })
 
 // 定义有依赖的模块
 define(['module1', 'module2'], function(m1, m2){
-   return 模块
+  return 模块
 })
 
 // 引入使用模块
 require(['module1', 'module2'], function(m1, m2){
-   // 使用m1/m2
+  // 使用m1、m2
 })
 ```
 
@@ -170,8 +170,8 @@ define(function(require, exports, module){
   //引入依赖模块(同步)
   var module2 = require('./module2')
   //引入依赖模块(异步)
-    require.async('./module3', function (m3) {
-    })
+  require.async('./module3', function (m3) {
+  })
   //暴露模块
   exports.xxx = value
 })
@@ -240,20 +240,19 @@ console.log(counter); // 4
 
 
 
-**参考文章**
+## 相关链接
 
-1. [ 阮一峰——Module 的加载实现](http://es6.ruanyifeng.com/#docs/module-loader)
-2. [前端模块化：CommonJS，AMD，CMD，ES6](https://juejin.im/post/5aaa37c8f265da23945f365c)
-3. [前端模块化详解(完整版)](https://juejin.im/post/5c17ad756fb9a049ff4e0a62)
+* [阮一峰——Module 的加载实现](http://es6.ruanyifeng.com/#docs/module-loader)
 
+* [前端模块化：CommonJS，AMD，CMD，ES6](https://juejin.im/post/5aaa37c8f265da23945f365c)
 
-
-<style>
-  blockquote {
-    font-size: 16px;
-  }
-</style>
+* [前端模块化详解(完整版)](https://juejin.im/post/5c17ad756fb9a049ff4e0a62)
 
 
-​                                                                          
+
+## 示例代码
+
+示例代码可以看这里：
+
+* [模块化 示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter0)
 

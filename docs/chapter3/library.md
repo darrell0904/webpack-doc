@@ -2,7 +2,7 @@
 
 这一节来讲一下当我们开发类库的时候，`webpack` 需要怎么配置。
 
-
+&nbsp;
 
 ## 写点代码
 
@@ -12,19 +12,19 @@
 // math.js
 
 export function add(a, b) {
-	return a + b;
+  return a + b;
 }
 
 export function minus(a, b) {
-	return a - b;
+  return a - b;
 }
 
 export function multiply(a, b) {
-	return a * b;
+  return a * b;
 }
 
 export function division(a, b) {
-	return a / b;
+  return a / b;
 }
 
 // string.js
@@ -32,7 +32,7 @@ export function division(a, b) {
 import _ from 'lodash';
 
 export function join(a, b) {
-	return _.join([a, b], ' ');
+  return _.join([a, b], ' ');
 }
 ```
 
@@ -46,13 +46,11 @@ export function join(a, b) {
 npm install lodash -D
 ```
 
-
-
 &nbsp;
 
 现在我们需要讲我们写的几个方法导出去，让使用者可以用起来，这里我们先要在回顾一下引入类库的几种方式。
 
-
+&nbsp;
 
 ## 引入类库的几种方式
 
@@ -69,7 +67,7 @@ npm install lodash -D
 
 ```javascript
 define(['demo'], function(demo) {
-	demo();
+  demo();
 });
 ```
 
@@ -97,7 +95,7 @@ demo();
 
 上面是我们常用的几种模块类库导入方式，为什么我们直接就能导入这些类库，如果你是使用 `webpack`  打包的类库，那就是 `webpack` 配置 `output.library` 和 `output.libraryTarget` 提供的功能。
 
-
+&nbsp;
 
 ## 配置 `webpack`
 
@@ -107,20 +105,22 @@ demo();
 const path = require('path');
 
 const prodConfig = {
-	...
-	output: {
-		path: path.resolve(__dirname, '../dist'),
-		filename: 'library.js', // 打包出来的名字
-		library: 'root', // 用 <script> 方式引入，全局的变量名
+  ...
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'library.js', // 打包出来的名字
+    library: 'root', // 用 <script> 方式引入，全局的变量名
     libraryTarget: 'umd', // 适用于 AMD、CommonJs、ES6 module引入方式
-	}
+  }
   ...
 }
 
 module.exports = merge(commonConfig, prodConfig);
 ```
 
-配置讲解：
+**配置讲解：**
+
+&nbsp;
 
 ### `library`：
 
@@ -138,9 +138,9 @@ module.exports = merge(commonConfig, prodConfig);
 const prodConfig = {
 	...
 	output: {
-		path: path.resolve(__dirname, '../dist'),
-		filename: 'library.js', // 打包出来的名字
-		library: 'root', // 用 <script> 方式引入，全局的变量名
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'library.js', // 打包出来的名字
+    library: 'root', // 用 <script> 方式引入，全局的变量名
     libraryTarget: 'umd', // 适用于 AMD、CommonJs、ES6 module引入方式
     libraryExport: 'default',
 	}
@@ -152,7 +152,7 @@ const prodConfig = {
 
 ![](./img/library2.png)
 
-
+&nbsp;
 
 ### libraryTarget：
 
@@ -160,7 +160,7 @@ const prodConfig = {
 
 打包的文件选用哪种引入方式，它一共支持的值如下，我们讲几个常用的配置，没讲到的大家可以通过 [outputlibrarytarget](https://webpack.js.org/configuration/output/#outputlibrarytarget) 自行查看。
 
-
+&nbsp;
 
 #### **暴露一个变量**
 
@@ -185,7 +185,7 @@ myDemo();
 
 使用这个设置，会把库返回值分配给一个没使用 `var` 申明的变量中，如果这个变量没有在引入作用域中提前申明过，那么将会挂载在全局作用域中。（注意，**这个行为有可能会覆盖全局作用域中的已有变量**）
 
-
+&nbsp;
 
 #### 通过对象属性暴露
 
@@ -198,8 +198,6 @@ myDemo();
 因为浏览器中全局的 `this`，就是 `window`，所以我们也可以这样访问：
 
 ![](./img/library4.png)
-
-
 
 * `window`：可以参考 `this`
 * `global`：适用于 `Node`，它会将模块挂到 `global` 上
@@ -217,7 +215,7 @@ require("myDemo").doSomething();
 
 
 
-
+&nbsp;
 
 #### 模块定义系统
 
@@ -240,7 +238,7 @@ myDemo();
 >
 > `CommonJS` 和 `CommonJS2` 长的非常像？他们的区别大家可以参考 [issue](https://github.com/webpack/webpack/issues/1114)
 
-
+&nbsp;
 
 * `AMD`
 
@@ -255,18 +253,16 @@ myDemo();
 
 ```javascript
 define("myDemo", [], function() {
-	return _entry_return_;
+  return _entry_return_;
 });
 ```
-
-
 
 以上的代码可以作为 `script` 标签引入代码的一部分被包含，然后在通过以下代码调用：
 
 ```javascript
 require(['myDemo'], function(myDemo) {
-	// Do something with the library...
-	myDemo();
+  // Do something with the library...
+  myDemo();
 });
 ```
 
@@ -274,7 +270,7 @@ require(['myDemo'], function(myDemo) {
 
 ```javascript
 define([], function() {
-	return _entry_return_;
+  return _entry_return_;
 });
 ```
 
@@ -293,16 +289,16 @@ define([], function() {
 
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
-if(typeof exports === 'object' && typeof module === 'object')
-  module.exports = factory();
-else if(typeof define === 'function' && define.amd)
-  define([], factory);
-else if(typeof exports === 'object')
-  exports["MyLibrary"] = factory();
-else
-  root["MyLibrary"] = factory();
+  if(typeof exports === 'object' && typeof module === 'object')
+    module.exports = factory();
+  else if(typeof define === 'function' && define.amd)
+    define([], factory);
+  else if(typeof exports === 'object')
+    exports["MyLibrary"] = factory();
+  else
+    root["MyLibrary"] = factory();
 })(typeof self !== 'undefined' ? self : this, function() {
-return _entry_return_;
+  return _entry_return_;
 });
 ```
 
@@ -334,7 +330,7 @@ output: {
     amd: "my-demo",
     commonjs: "my-common-demo"
   },
-    libraryTarget: "umd"
+  libraryTarget: "umd"
 }
 ```
 
@@ -344,7 +340,7 @@ output: {
 
 这个方法会使用 jsonp 的方式把结果包裹起来。
 
-
+&nbsp;
 
 ### externals：
 
@@ -362,10 +358,10 @@ output: {
 ...
 
 const prodConfig = {
-	mode: 'production',
+  mode: 'production',
   devtool: 'cheap-module-source-map', // production
-	externals: 'lodash',
-	...
+  externals: 'lodash',
+  ...
 }
 
 ...
@@ -397,8 +393,6 @@ externals: {
 }
 ```
 
-
-
 &nbsp;
 
 更详细的配置大家可以参考：
@@ -406,6 +400,8 @@ externals: {
 * [externals](https://webpack.js.org/configuration/externals/)
 
 
+
+&nbsp;
 
 ## 相关链接
 
@@ -417,8 +413,10 @@ externals: {
 
 
 
+&nbsp;
+
 ## 示例代码
 
 示例代码可以看这里：
 
-* [library 打包示例代码]()
+* [library 打包示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter3/library-demo)

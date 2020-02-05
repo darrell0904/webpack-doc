@@ -1,8 +1,8 @@
-# Tree Shaking 概念详解
+# 配置 Tree Shaking
 
 `tree-shaking` 简称摇树。它的作用是 **能够在模块的层面上做到打包后的代码只包含被引用并被执行的模块，而不被引用或不被执行的模块被删除掉，以起到减包的效果。**
 
-
+&nbsp;
 
 ## 写点代码
 
@@ -40,17 +40,19 @@ webpack --config ./config/webpack.dev.js
 
 
 
+&nbsp;
+
 ## 相关配置
 
 我们修改 `config` 下的 `webpack.dev.js` 文件：(区分环境打包可以看下一节内容)
 
 ```javascript
 const devConfig = {
-    ...
-    optimization: {
-		usedExports: true,
-	},
-    ...
+  ...
+  optimization: {
+    usedExports: true,
+  },
+  ...
 }
 ```
 
@@ -72,8 +74,6 @@ const devConfig = {
 
 这里的原因是因为我们的 `webpack` 配置文件，它对应的打包环境是 `development`，即开发环境。在开发环境下面，`webpack` 默认不会删除我们的代码，而是会加上几行注释，如果删除的话，可能会影响我们开发时定位错误。
 
-
-
 &nbsp;
 
 那我们使用：`npm run build` 命令，实际上运行的是：
@@ -90,13 +90,15 @@ webpack --config ./config/webpack.prod.js
 >
 > ```javascript
 > optimization: {
-> 	usedExports: true,
+>   usedExports: true,
 > },
 > ```
 >
 > `webpack` 默认帮我们在线上环境开启了 `tree_shaking`
 
 
+
+&nbsp;
 
 ### sideEffects
 
@@ -167,8 +169,6 @@ import './index.less'
 
  `tree_shaking` 会认为你没有导出任何模块，在打包过程中，他直接就把它给忽略掉了，所以打包后的文件中根本没有这个 `index.less` 文件。
 
-
-
 &nbsp;
 
 又比如说，我们上一节讲到的，引入 `@babel/polly-fill`
@@ -185,8 +185,8 @@ import '@babel/polly-fill'
 
 ```json
 "sideEffects": [
-    "*.less",
-    "@babel/polly-fill",
+  "*.less",
+  "@babel/polly-fill",
 ]
 ```
 
@@ -197,6 +197,8 @@ import '@babel/polly-fill'
 ![](./img/tree_shaking6.png)
 
 
+
+&nbsp;
 
 ## `tree-shaking` 的局限性
 
@@ -231,6 +233,8 @@ if (condition) {
 
 
 
+&nbsp;
+
 ## 相关链接
 
 * [webpack官网 tree_shaking](https://webpack.js.org/guides/tree-shaking/)
@@ -238,8 +242,11 @@ if (condition) {
 
 
 
+&nbsp;
+
 ## 示例代码
 
 示例代码可以看这里：
 
-* [Tree Shaking  示例代码]()
+* [Tree Shaking  示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter2/tree-shaking-demo)
+

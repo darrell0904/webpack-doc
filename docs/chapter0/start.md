@@ -61,6 +61,10 @@ npx webpack index.js
 
 
 
+&nbsp;
+
+&nbsp;
+
 ## 安装 webpack
 
 如何安装webpack?
@@ -157,7 +161,7 @@ npm install // 安装所有的项目所需依赖
 
 来完成依赖的安装，然后才可以正常的执行程序。
 
-
+&nbsp;
 
 ## webpack 的配置文件
 
@@ -187,11 +191,11 @@ npx webpack index.js
 const path = require('path');
 
 module.exports = {
-	entry: './index.js', 				// 打包的入口文件
-	output: { 							// 打包好的文件放在哪个文件夹下
-		filename: 'bundle.js',			// 打包出来的文件的名字
-		path: path.resolve(__dirname, 'bundle') // 打包完放置文件的文件夹
-	}
+  entry: './index.js', 				// 打包的入口文件
+  output: { 							// 打包好的文件放在哪个文件夹下
+    filename: 'bundle.js',			// 打包出来的文件的名字
+    path: path.resolve(__dirname, 'bundle') // 打包完放置文件的文件夹
+  }
 }
 ```
 
@@ -205,8 +209,8 @@ module.exports = {
 const path = require('path');
 
 module.exports = {
-	entry: './index.js', 				// 打包的入口文件
-	output: './dist/main.js'			// output 文件路径与名称
+  entry: './index.js', 				// 打包的入口文件
+  output: './dist/main.js'			// output 文件路径与名称
 }
 ```
 
@@ -252,7 +256,7 @@ npm run bundle
 
 * 这里我们讲一下 `webpack-cli` 的作用，它的作用就是让我们能够在命令行里面正确的执行 `webpack` 这个命令；如果不安装它的话，我们就不能够 在命令行里面使用 `webpack` 或者 `npx webpack`
 
-
+&nbsp;
 
 ## webpack的打包输出内容
 
@@ -311,7 +315,7 @@ entry: './src/index.js',
 // entry
 ...
 entry: {
-    main: './src/index.js'
+  main: './src/index.js'
 }
 ...
 ```
@@ -359,9 +363,9 @@ mode: 'production',
 	<title>模块化问题例子</title>
 </head>
 <body>
-	<p>网页内容</p>
+  <p>网页内容</p>
   <div id='root'></div>
-	<script src='./bundle.js'></script>
+  <script src='./bundle.js'></script>
 </body>
 </html>
 ```
@@ -370,4 +374,18 @@ mode: 'production',
 
 ![](./img/1.png)
 
-源码在此：[webpack-demo](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter0/webpack-demo)
+&nbsp;
+
+&nbsp;
+
+## 相关链接
+
+&nbsp;
+
+&nbsp;
+
+## 示例代码
+
+示例代码可以看这里：
+
+* [安装 webpack 示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter0/webpack-demo)

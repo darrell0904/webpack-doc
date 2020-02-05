@@ -53,7 +53,6 @@ module.exports = {
           'chapter2/css_splitting.md',
           'chapter2/caching.md',
           'chapter2/shimming.md',
-          'chapter2/split_chunks_plugin.md',
           'chapter2/env.md',
         ]
       },

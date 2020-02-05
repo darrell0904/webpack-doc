@@ -8,6 +8,8 @@
 
 
 
+&nbsp;
+
 ## 举两个🌰
 
 ### `less` 中：
@@ -21,9 +23,9 @@ btn.innerHTML = '新增';
 document.body.appendChild(btn);
 
 btn.onclick = function() {
-	var div = document.createElement('div');
-	div.innerHTML = 'item';
-	document.body.appendChild(div);
+  var div = document.createElement('div');
+  div.innerHTML = 'item';
+  document.body.appendChild(div);
 }
 ```
 
@@ -33,7 +35,7 @@ btn.onclick = function() {
 
 ```less
 div:nth-of-type(odd) {
-	background: red;
+  background: red;
 }
 ```
 
@@ -49,7 +51,7 @@ div:nth-of-type(odd) {
 
 ```less
 div:nth-of-type(odd) {
-	background: yellow;
+  background: yellow;
 }
 ```
 
@@ -103,10 +105,10 @@ if(module.hot) {
 
 ```javascript
 function number() {
-	var div = document.createElement('div');
-	div.setAttribute('id', 'number');
-	div.innerHTML = 3000;
-	document.body.appendChild(div);
+  var div = document.createElement('div');
+  div.setAttribute('id', 'number');
+  div.innerHTML = 3000;
+  document.body.appendChild(div);
 }
 
 export default number;
@@ -118,13 +120,13 @@ export default number;
 
 ```javascript
 function counter() {
-	var div = document.createElement('div');
-	div.setAttribute('id', 'counter');
-	div.innerHTML = 1;
-	div.onclick = function() {
-		div.innerHTML = parseInt(div.innerHTML, 10) + 1
-	}
-	document.body.appendChild(div);
+  var div = document.createElement('div');
+  div.setAttribute('id', 'counter');
+  div.innerHTML = 1;
+  div.onclick = function() {
+    div.innerHTML = parseInt(div.innerHTML, 10) + 1
+  }
+  document.body.appendChild(div);
 }
 
 export default counter;
@@ -158,6 +160,8 @@ export default counter;
 
 
 
+&nbsp;
+
 ## 配置
 
 我们修改 `webpack.congig.js` 配置文件：
@@ -170,17 +174,17 @@ const webpack = require('webpack');
 module.exports = {
   ...
   devServer: {
-		contentBase: './dist',
-		open: true,
-		port: 8080,
-		hot: true,
-		hotOnly: true
-	},
+    contentBase: './dist',
+    open: true,
+    port: 8080,
+    hot: true,
+    hotOnly: true
+  },
   ...
   plugins: [
-		...
-		new webpack.HotModuleReplacementPlugin()
-	],
+    ...
+    new webpack.HotModuleReplacementPlugin()
+  ],
   ...
 }
 ```
@@ -225,10 +229,10 @@ module.exports = {
 
 ```javascript
 if(module.hot) {
-	module.hot.accept('./number', () => {
-		document.body.removeChild(document.getElementById('number'));
-		number();
-	})
+  module.hot.accept('./number', () => {
+    document.body.removeChild(document.getElementById('number'));
+    number();
+  })
 }
 ```
 
@@ -250,7 +254,7 @@ if(module.hot) {
 
 
 
-
+&nbsp;
 
 ## 实现原理
 
@@ -258,12 +262,16 @@ if(module.hot) {
 
 
 
+&nbsp;
+
 ## 相关链接
 
 * [HMR 使用](https://webpack.js.org/concepts/hot-module-replacement/)
 * [HMR 相关API](https://webpack.js.org/api/hot-module-replacement/)
 
 
+
+&nbsp;
 
 ## 示例代码
 

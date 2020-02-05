@@ -20,20 +20,20 @@ import webpackSrc from './webpack.png';
 const path = require('path');
 
 module.exports = {
-	mode: 'development',
-	entry: './src/index.js',
-	module: {
-		rules: [{
-			test: /\.png$/,
-			use: {
-				loader: 'file-loader',
-			}
-		}]
-	},
-	output: {
-		filename: 'bundle.js',
-		path: path.resolve(__dirname, 'bundle')
-	}
+  mode: 'development',
+  entry: './src/index.js',
+  module: {
+    rules: [{
+      test: /\.png$/,
+      use: {
+        loader: 'file-loader',
+      }
+    }]
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'bundle')
+  }
 }
 ```
 
@@ -69,7 +69,7 @@ console.log(webpackSrc);
 
 `file-loader` 不能仅仅能打包图片文件，还能打包其他类型的文件，比如字体文件、`txt`、`Excel` 文件等，只要你想讲某个文件返回到某一个目录，并且返回这个文件名的时候，file-loader 都可以做到。
 
-
+&nbsp;
 
 ## loader 是什么？
 
@@ -81,7 +81,7 @@ console.log(webpackSrc);
 
 我们再举一个例子，可能有些朋友写过 `vue`，在 `vue` 中，文件是以 `.vue` 文件结尾的文件，`webpack` 是不认识 `.vue` 文件的，所以需要安装一个 打包 `vue-loader` 来帮助 webpack 打包 vue 文件。
 
-
+&nbsp;
 
 ## 如何配置loader
 
@@ -99,40 +99,40 @@ console.log(webpackSrc);
 
 ```js
 module: {
-    rules: [
-        {
-            // 命中 js 文件
-            test: /\.js$/,
-            // 使用 babel-loader 来解析 js 文件
-            use: ['babel-loader'],
-            // 只命中 src 目录下的 js 文件，加快 webpack 的加载速度
-            include: path.resolve(__dirname, 'src')
-        },
-        {
-            // 命中 less 文件
-            test: /\.less$/,
-            // 从右到左依次使用 less-loader、css-loader、style-loader
-            use: ['style-loader', 'css-loader', 'less-loader'],
-            // 排除 node_modules 下面的 less 文件
-            exclude: path.resolve(__dirname, 'node_modules')
-        },
-        {
-            // 命中字体、图片文件
-            test: /\.(gif|png|jpe?g|eot|woff|ttf|svg|pdf)$/,
-            // 采用 file-loader 加载，并给 file-loader 传入
-            // 相应的配置参数，通过 placeholders 指定 输出的名字
-            use: {
-            	loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]',
-                }
-            },
+  rules: [
+    {
+      // 命中 js 文件
+      test: /\.js$/,
+      // 使用 babel-loader 来解析 js 文件
+      use: ['babel-loader'],
+      // 只命中 src 目录下的 js 文件，加快 webpack 的加载速度
+      include: path.resolve(__dirname, 'src')
+    },
+    {
+      // 命中 less 文件
+      test: /\.less$/,
+      // 从右到左依次使用 less-loader、css-loader、style-loader
+      use: ['style-loader', 'css-loader', 'less-loader'],
+      // 排除 node_modules 下面的 less 文件
+      exclude: path.resolve(__dirname, 'node_modules')
+    },
+    {
+      // 命中字体、图片文件
+      test: /\.(gif|png|jpe?g|eot|woff|ttf|svg|pdf)$/,
+      // 采用 file-loader 加载，并给 file-loader 传入
+      // 相应的配置参数，通过 placeholders 指定 输出的名字
+      use: {
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
         }
-    ]
+      },
+    }
+  ]
 }
 ```
 
-
+&nbsp;
 
 ## 常用的 `loader` 及其用法
 
@@ -142,13 +142,13 @@ module: {
 
 ```js
 rules: [{
-    test: /\.png$/,
-    use: {
-        loader: 'file-loader',
-        options: {
-            name: '[name].[ext]'
-        }
+  test: /\.png$/,
+  use: {
+    loader: 'file-loader',
+    options: {
+      name: '[name].[ext]'
     }
+  }
 }]
 ```
 
@@ -160,13 +160,13 @@ rules: [{
 
 ```js
 rules: [{
-    test: /\.png$/,
-    use: {
-        loader: 'file-loader',
-        options: {
-            name: '[name]_[hash].[ext]'
-        }
+  test: /\.png$/,
+  use: {
+    loader: 'file-loader',
+    options: {
+      name: '[name]_[hash].[ext]'
     }
+  }
 }]
 ```
 
@@ -176,14 +176,14 @@ rules: [{
 
 ```js
 rules: [{
-    test: /\.png$/,
-    use: {
-        loader: 'file-loader',
-        options: {
-            name: '[name]_[hash].[ext]',
-            outputPath: 'images/',
-        }
+  test: /\.png$/,
+  use: {
+    loader: 'file-loader',
+    options: {
+      name: '[name]_[hash].[ext]',
+      outputPath: 'images/',
     }
+  }
 }]
 ```
 
@@ -201,16 +201,16 @@ npm install url-loader -D
 
 ```js
 module: {
-    rules: [{
-        test: /\.png$/,
-        use: {
-            loader: 'url-loader',
-            options: {
-                name: '[name]_[hash].[ext]',
-                outputPath: 'images/',
-            }
-        }
-    }]
+  rules: [{
+    test: /\.png$/,
+    use: {
+      loader: 'url-loader',
+      options: {
+        name: '[name]_[hash].[ext]',
+        outputPath: 'images/',
+      }
+    }
+  }]
 },
 ```
 
@@ -226,17 +226,17 @@ module: {
 
 ```js
 module: {
-    rules: [{
-        test: /\.png$/,
-        use: {
-            loader: 'url-loader',
-            options: {
-                name: '[name]_[hash].[ext]',
-                outputPath: 'images/',
-                limit: 10240,
-            }
-        }
-    }]
+  rules: [{
+    test: /\.png$/,
+    use: {
+      loader: 'url-loader',
+      options: {
+        name: '[name]_[hash].[ext]',
+        outputPath: 'images/',
+        limit: 10240,
+      }
+    }
+  }]
 },
 ```
 
@@ -248,6 +248,8 @@ module: {
 * [file-loader](https://webpack.js.org/loaders/file-loader/)
 
 
+
+&nbsp;
 
 ### 打包样式文件（样式篇）
 
@@ -371,11 +373,11 @@ module.exports = {
 {
 	test: /\.less$/,
 	use: [
-        'style-loader',
-        'css-loader',
-        'less-loader',
-        'postcss-loader',
-   	]
+    'style-loader',
+    'css-loader',
+    'less-loader',
+    'postcss-loader',
+  ]
 }
 ```
 
@@ -387,30 +389,34 @@ module.exports = {
 
 
 
+&nbsp;
+
 #### loader 的执行顺序
 
 有的时候，我们会在 `js` 里面加上` less` 文件的时候，`webpack` 会依次去走一下 4 个`loader`，但是有的时候 `less` 文件里面 引入其他的 `less` 文件，这个时候就有可能不去走 下面的 `less-loader` 与 `postcss-loader` 了，所以我们就需要在 `css-loader` 里面传入一个参数 `importLoaders` 为 2：
 
 ```js
 {
-	test: /\.less$/,
-	use: [
-        'style-loader',
-        {
-            loader: 'css-loader',
-            options: {
-                importLoaders: 2
-            }
-        },
-        'less-loader',
-        'postcss-loader',
-   	]
+  test: /\.less$/,
+  use: [
+    'style-loader',
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 2
+      }
+    },
+    'less-loader',
+    'postcss-loader',
+  ]
 }
 ```
 
 上面这个参数的意思就是，通过在 `less` 里面引入的文件 还需要去走下面的两个 `loader`,这就保证了，不管你是 `js` 引入的还是`less` 引入的，都会从下到上依次去走四个 `loader`
 
 
+
+&nbsp;
 
 #### css 模块化
 
@@ -463,19 +469,19 @@ dom.append(img);
 
 ```js
 {
-	test: /\.less$/,
-	use: [
-        'style-loader',
-        {
-            loader: 'css-loader',
-            options: {
-                importLoaders: 2,
-                modules: true,
-            }
-        },
-        'less-loader',
-        'postcss-loader',
-   	]
+  test: /\.less$/,
+  use: [
+    'style-loader',
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 2,
+        modules: true,
+      }
+    },
+    'less-loader',
+    'postcss-loader',
+  ]
 }
 ```
 
@@ -516,6 +522,8 @@ export default createAvatar;
 这样带来的好处就是，我们写的各个模块里的样式文件都只对自己的模块生效，非常独立，不会对其他模块产生影响。
 
 
+
+&nbsp;
 
 #### 打包图标字体
 
@@ -564,10 +572,10 @@ dom.innerHTML = "<div class='iconfont icon-left'></div>"
 
 ```js
 {
-    test: /\.(eot|ttf|svg|woff|woff2)$/,
-	use: {
-		loader: 'file-loader',
-	}
+  test: /\.(eot|ttf|svg|woff|woff2)$/,
+  use: {
+    loader: 'file-loader',
+  }
 },
 ```
 
@@ -586,7 +594,19 @@ dom.innerHTML = "<div class='iconfont icon-left'></div>"
 
 
 
+&nbsp;
 
+## 相关链接
+
+- [官网 loader](https://webpack.js.org/loaders/)
+
+&nbsp;
+
+## 示例代码
+
+示例代码可以看这里：
+
+- [loader 示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter1/loader-demo)
 
 
 

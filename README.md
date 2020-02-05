@@ -155,7 +155,7 @@ sudo vi /etc/hosts
 
 这里列举了笔者学习 `webpack` 的主要来源，其余的参考资料我会再每一节发出来。
 
-* [从基础到实战 手把手带你掌握新版Webpack4.0（慕课网 ）](https://coding.imooc.com/class/316.html)
-* [玩转webpack（极客时间 ）](https://time.geekbang.org/course/intro/190)
-* [深入浅出 webpack（书籍 ）](https://webpack.wuhaolin.cn/)
+* [从基础到实战 手把手带你掌握新版Webpack4.0（慕课网）](https://coding.imooc.com/class/316.html)
+* [玩转webpack（极客时间）](https://time.geekbang.org/course/intro/190)
+* [深入浅出 webpack（书籍）](https://webpack.wuhaolin.cn/)
 * [使用 webpack 定制前端开发环境（掘金）](https://juejin.im/book/5a6abad5518825733c144469)

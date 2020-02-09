@@ -70,6 +70,25 @@ module.exports = {
           'chapter3/more_page.md',
         ]
       },
+      {
+        title: 'Webpack 底层原理',
+        collapsable: true,
+        children: [
+          ['chapter4/', 'Webpack 底层原理'],
+          'chapter4/writeLoader.md',
+          'chapter4/writePlugin.md',
+          'chapter4/writeWebpack.md',
+        ]
+      },
+      {
+        title: 'React、Vue框架脚手架配置分析',
+        collapsable: true,
+        children: [
+          ['chapter5/', 'React、Vue框架脚手架配置分析'],
+          'chapter5/createReactApp.md',
+          'chapter5/vueCli3.md',
+        ]
+      },
     ],
   }
 }

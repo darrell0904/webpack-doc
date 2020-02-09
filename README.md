@@ -123,9 +123,9 @@ sudo vi /etc/hosts
 * [Develoment 和 Production 模式的区分打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/mode.md)
 * [Webpack 和 Code Splitting](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/code_splitting.md)
 * [配置 SplitChunksPlugin](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/split_chunks_plugin.md)
-* 配置 Lazy Loading （懒加载）
-* 打包分析 （Preloading、Prefetching）
-* CSS 文件的代码分割
+* [配置 Lazy Loading （懒加载）](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/lazy_loading.md)
+* [打包分析 与 Preloading、Prefetching](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/analysis.md)
+* [css 文件的代码分割](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/css_splitting.md)
 * Webpack 与浏览器缓存（Caching）
 * Shimming 的作用
 * 环境变量的使用

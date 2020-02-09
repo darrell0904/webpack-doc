@@ -123,4 +123,4 @@ export default getComponent;
 
 示例代码可以看这里：
 
-- [Lazy Loading 示例代码]()
+- [Lazy Loading 示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter2/lazy-loading-demo)

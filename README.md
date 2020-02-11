@@ -119,10 +119,10 @@ sudo vi /etc/hosts
 * [配置 SplitChunksPlugin](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/split_chunks_plugin.md)
 * [配置 Lazy Loading （懒加载）](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/lazy_loading.md)
 * [打包分析 与 Preloading、Prefetching](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/analysis.md)
-* [css 文件的代码分割](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/css_splitting.md)
-* Webpack 与浏览器缓存（Caching）
-* Shimming 的作用
-* 环境变量的使用
+* [CSS 文件的代码分割](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/css_splitting.md)
+* [Webpack 与浏览器缓存（Caching）](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/caching.md)
+* [Shimming 的作用](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/shimming.md)
+* [环境变量的使用](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/env.md)
 
 
 &nbsp;
@@ -130,12 +130,12 @@ sudo vi /etc/hosts
 
 * Webpack 实战配置案例
 * [Library 打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/library.md)
-* PWA 打包
-* TypeScript 打包
-* webpack-dev-server 高级配置
-* 配置 EsLint
+* [PWA 打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/pwa.md)
+* [TypeScript 打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/typescript.md)
+* [webpack-dev-server 高级配置](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/webpack_dev_server.md)
+* [配置 EsLint](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/esLint.md)
 * Webpack 性能优化
-* Webpack 多页面打包
+* [Webpack 多页面打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/more_page.md)
 
 
 &nbsp;

@@ -370,16 +370,12 @@ const prodConfig = {
 
 ![](./img/css_splits2.png)
 
-
-
 &nbsp;
 
 ## 相关链接
 
 - [webpack 官网 MiniCssExtractPlugin](https://webpack.js.org/plugins/mini-css-extract-plugin/#getting-started)
 - [【Webpack4】CSS 配置之 MiniCssExtractPlugin](https://juejin.im/post/5dee249e518825125f398f70)
-
-
 
 &nbsp;
 

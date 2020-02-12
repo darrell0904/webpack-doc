@@ -26,21 +26,21 @@ npm install eslint -D // eslint@6.8.0
 
 ```javascript
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true
-    },
-    "extends": "eslint:recommended",
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "rules": {
-    }
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": "eslint:recommended",
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+  }
 };
 ```
 
@@ -68,22 +68,22 @@ npm install babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin
 
 ```javascript
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true
-    },
-    "parser": "babel-eslint",
-    "extends": "airbnb", // 使用 eslint
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "rules": {
-    }
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "extends": "airbnb", // 使用 eslint
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+  }
 };
 ```
 
@@ -91,9 +91,9 @@ module.exports = {
 
 ```json
 "scripts": {
-    ...
-    "lint": "eslint --ext .js,.tsx ./src",
-    ...
+  ...
+  "lint": "eslint --ext .js,.tsx ./src",
+  ...
 },
 ```
 
@@ -108,9 +108,9 @@ module.exports = {
 ```javascript
 ...
 "rules": {
-   "react/prefer-stateless-function": 0,
-   "react/jsx-filename-extension": 0,
-   "import/no-unresolved": 0,
+  "react/prefer-stateless-function": 0,
+  "react/jsx-filename-extension": 0,
+  "import/no-unresolved": 0,
 }
 ...
 ```
@@ -123,13 +123,13 @@ module.exports = {
 
 ```javascript
 module.exports = {
-    ...
-    "settings": {
-        "react": {
-          "version": "detect",
-        },
+  ...
+  "settings": {
+    "react": {
+      "version": "detect",
     },
-		...
+  },
+  ...
 };
 ```
 
@@ -158,17 +158,17 @@ npm install eslint-loader -D
 ```javascript
 ...
 const commonConfig = {
-	...
-	module: {
-		rules: [
+  ...
+  module: {
+    rules: [
       { 
         test: /\.js|jsx$/, 
         exclude: /node_modules/, 
         use: ['babel-loader','eslint-loader']
-			},
+      },
       ...
     ]
-	},
+  },
   ...
 }
 ...
@@ -188,13 +188,13 @@ const commonConfig = {
 ...
 
 const devConfig = {
-	...
-	devServer: {
-		overlay: true,
-		contentBase: './dist',
-		port: 8080,
-		hot: true
-	},
+  ...
+  devServer: {
+    overlay: true,
+    contentBase: './dist',
+    port: 8080,
+    hot: true
+  },
   ...
 }
 
@@ -253,7 +253,7 @@ npm install pre-commit -D
   ...
 },
 "pre-commit": [
-	"lint"
+  "lint"
 ]
 ```
 

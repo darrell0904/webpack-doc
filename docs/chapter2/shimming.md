@@ -67,11 +67,11 @@ const webpack = require('webpack');
 module.exports = {
   ...
   plugins: [
-		...
-		new webpack.ProvidePlugin({
-			$: 'jquery',
-		})
-	],
+    ...
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+    })
+  ],
   ...
 }
 ```
@@ -103,12 +103,12 @@ const webpack = require('webpack');
 module.exports = {
   ...
   plugins: [
-		...
-		new webpack.ProvidePlugin({
-			$: 'jquery',
+    ...
+    new webpack.ProvidePlugin({
+      $: 'jquery',
       _: 'lodash'
-		})
-	],
+    })
+  ],
   ...
 }
 ```
@@ -156,23 +156,21 @@ npm install imports-loader -D
 ...
 
 module.exports = {
-	...
-	module: {
-		rules: [
+  ...
+  module: {
+    rules: [
       { 
         test: /\.js$/, 
         exclude: /node_modules/, 
         use: [
-          {
-            loader: 'babel-loader'
-          }, 
+          'babel-loader',
           {
             loader: 'imports-loader?this=>window'
           }
         ]
-			},
+      },
       ...
-   ],
+    ],
   }
   ...
 }

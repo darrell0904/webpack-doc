@@ -20,10 +20,10 @@ import axios from 'axios';
 class App extends Component {
 
   componentDidMount() {
-		axios.get('https://douban.uieee.com/v2/movie/top250')
-			.then((res) => {
-				console.log(res);
-			})
+    axios.get('https://douban.uieee.com/v2/movie/top250')
+      .then((res) => {
+      console.log(res);
+    })
   }
 
   render() {
@@ -56,10 +56,10 @@ npm install axios -S
 
 class App extends Component {
   componentDidMount() {
-		axios.get('/movie/top250')
-			.then((res) => {
-				console.log(res);
-			})
+    axios.get('/movie/top250')
+      .then((res) => {
+      console.log(res);
+    })
   }
   ...
 }
@@ -82,18 +82,18 @@ class App extends Component {
 ...
 
 const devConfig = {
-	...
-	devServer: {
-		overlay: true,
-		contentBase: './dist',
-		port: 8080,
-		hot: true,
-		proxy: {
-			'/movie/': {
-				target: 'https://douban.uieee.com/v2',
-			}
-		}
-	},
+  ...
+  devServer: {
+    overlay: true,
+    contentBase: './dist',
+    port: 8080,
+    hot: true,
+    proxy: {
+      '/movie/': {
+        target: 'https://douban.uieee.com/v2',
+      }
+    }
+  },
   ...
 }
 ...
@@ -119,21 +119,21 @@ const devConfig = {
 ...
 
 const devConfig = {
-	...
-	devServer: {
-		overlay: true,
-		contentBase: './dist',
-		port: 8080,
-		hot: true,
-		proxy: {
-			'/movie/': {
-				target: 'https://douban.uieee.com/v2',
+  ...
+  devServer: {
+    overlay: true,
+    contentBase: './dist',
+    port: 8080,
+    hot: true,
+    proxy: {
+      '/movie/': {
+        target: 'https://douban.uieee.com/v2',
         pathRewrite: {
-					'top250': 'in_theaters'
-				},
-			}
-		}
-	},
+          'top250': 'in_theaters'
+        },
+      }
+    }
+  },
   ...
 }
 ...
@@ -220,9 +220,7 @@ proxy: {
 
 ```javascript
 module.exports = {
-
-  // ...
-
+  ...
   devServer: {
     index: '', // specify to enable root proxying
     proxy: {
@@ -241,10 +239,10 @@ module.exports = {
 
 ```javascript
 module.exports = {
-  //...
+  ...
   devServer: {
     proxy: {
-      '/movie/':: {
+      '/movie/': {
         target: 'https://douban.uieee.com/v2',
         changeOrigin: true
       }
@@ -263,16 +261,16 @@ module.exports = {
 
 ```javascript
 module.exports = {
-  //...
+  ...
   devServer: {
     proxy: {
-      '/movie/':: {
-        target: 'https://douban.uieee.com/v2',
-        changeOrigin: true,
+      '/movie/': {
+      	target: 'https://douban.uieee.com/v2',
+      	changeOrigin: true,
       	headers: {
-      		host:'www.example.org',
-      		cookie: 'isLogin=1' // 判断是否登录的 cookie 信息
-    		}
+          host:'www.example.org',
+          cookie: 'isLogin=1' // 判断是否登录的 cookie 信息
+        }
       }
     }
   }

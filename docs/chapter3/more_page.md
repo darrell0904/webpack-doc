@@ -67,11 +67,11 @@ ReactDom.render(<App />, document.getElementById('root'));
 ...
 
 const commonConfig = {
-	entry: {
-		main: "./src/index.js",
-		list: "./src/list.js",
-		details: "./src/details.js",
-	},
+  entry: {
+    main: "./src/index.js",
+    list: "./src/list.js",
+    details: "./src/details.js",
+  },
   ...
 }
 
@@ -100,48 +100,47 @@ const commonConfig = {
 ...
 
 const commonConfig = {
-	entry: {
-		main: "./src/index.js",
-		list: "./src/list.js",
-		details: "./src/details.js",
-	},
-	...
-	plugins: [
-		...
-
-		new HtmlWebpackPlugin({
-			template: 'src/index.html',
-			filename: 'index.html',
-			chunks: ['runtime', 'vendors', 'main'],
-		}),
-		new HtmlWebpackPlugin({
-			template: 'src/index.html',
-			filename: 'list.html',
-			chunks: ['runtime', 'vendors', 'list'],
-		}),
-		new HtmlWebpackPlugin({
-			template: 'src/index.html',
-			filename: 'details.html',
-			chunks: ['runtime', 'vendors', 'details'],
-		}),
-		...
-	],
-	optimization: {
-		usedExports: true,
-		runtimeChunk: {
-			name: 'runtime',
-		},
-		splitChunks: {
-			chunks: 'all',
-			cacheGroups: {
-				vendors: {
-					test: /[\\/]node_modules[\\/]/,
-					priority: -10,
-					name: 'vendors',
-				}
-			}
-		},
-	},
+  entry: {
+    main: "./src/index.js",
+    list: "./src/list.js",
+    details: "./src/details.js",
+  },
+  ...
+  plugins: [
+    ...
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      filename: 'index.html',
+      chunks: ['runtime', 'vendors', 'main'],
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      filename: 'list.html',
+      chunks: ['runtime', 'vendors', 'list'],
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      filename: 'details.html',
+      chunks: ['runtime', 'vendors', 'details'],
+    }),
+    ...
+  ],
+  optimization: {
+    usedExports: true,
+    runtimeChunk: {
+    	name: 'runtime',
+    },
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          name: 'vendors',
+        }
+      }
+    },
+  },
 }
 
 ...
@@ -189,30 +188,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 ...
 
 const makePlugins = (configs) => {
-
-	const plugins = [
-		new CleanWebpackPlugin(),
-	];
-
-	Object.keys(configs.entry).forEach(item => { // 遍历输出入口文件，拼接 HtmlWebpackPlugin
-		plugins.push(
-			new HtmlWebpackPlugin({
-				template: 'src/index.html',
-				filename: `${item}.html`,
-				chunks: ['runtime', 'vendors', item]
-			})
-		)
-	});
-
-	return plugins;
+  const plugins = [
+    new CleanWebpackPlugin(),
+  ];
+  
+  Object.keys(configs.entry).forEach(item => { // 遍历输出入口文件，拼接 HtmlWebpackPlugin
+    plugins.push(
+      new HtmlWebpackPlugin({
+        template: 'src/index.html',
+        filename: `${item}.html`,
+        chunks: ['runtime', 'vendors', item]
+      })
+    )
+  });
+  return plugins;
 }
 
 const commonConfig = {
   entry: {
-		index: "./src/index.js",
-		list: "./src/list.js",
-		details: "./src/details.js",
-	},
+    index: "./src/index.js",
+    list: "./src/list.js",
+    details: "./src/details.js",
+  },
   ...
 }
 
@@ -231,11 +228,11 @@ commonConfig.plugins = makePlugins(commonConfig);
 ...
 const commonConfig = {
   entry: {
-		index: "./src/index.js",
-		list: "./src/list.js",
-		details: "./src/details.js",
+    index: "./src/index.js",
+    list: "./src/list.js",
+    details: "./src/details.js",
     userInfo: "./src/userInfo.js"
-	},
+  },
   ...
 }
 ...

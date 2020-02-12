@@ -85,13 +85,13 @@ document.body.appendChild(button);
 
 ```json
 {
-	"compilerOpitons": {
-		"outDir": "./dist", // 打包输出的目录，不配置也没事，因为在 webpack 已经配置了
-		"module": "es6", // 打包的是 es6 d的代码
-		"target": "es5", // 打包出来的内容是 es5，在大部分浏览器红都能使用
-		"allowJs": true, // 允许 引入js
-	},
-	"include": ["src"], // 对 src 下的代码有效
+  "compilerOpitons": {
+    "outDir": "./dist", // 打包输出的目录，不配置也没事，因为在 webpack 已经配置了
+    "module": "es6", // 打包的是 es6 d的代码
+    "target": "es5", // 打包出来的内容是 es5，在大部分浏览器红都能使用
+    "allowJs": true, // 允许 引入js
+  },
+  "include": ["src"], // 对 src 下的代码有效
 }
 ```
 

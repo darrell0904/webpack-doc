@@ -88,18 +88,17 @@ npm install workbox-webpack-plugin -D
 ```javascript
 ...
 const WorkboxPlugin = require('workbox-webpack-plugin');
-
 ...
 
 const prodConfig = {
-	...
+  ...
   plugins: [
-		new WorkboxPlugin.GenerateSW({
-			clientsClaim: true,
-			skipWaiting: true
-		})
-	],
-	...
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true
+    })
+  ],
+  ...
 }
 
 ...
@@ -116,14 +115,14 @@ const root = document.getElementById('root');
 root.innerHTML = 'hello, this is darrell';
 
 if ('serviceWorker' in navigator) {
-	window.addEventListener('load', () => {
-		navigator.serviceWorker.register('/service-worker.js')
-			.then(registration => {
-				console.log('service-worker registed');
-			}).catch(error => {
-				console.log('service-worker register error');
-			})
-	})
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(registration => {
+        console.log('service-worker registed');
+      }).catch(error => {
+        console.log('service-worker register error');
+    })
+  })
 }
 ```
 

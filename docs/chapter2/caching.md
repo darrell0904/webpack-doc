@@ -40,11 +40,11 @@ $('body').append();
 ...
 const prodConfig = {
   ...
-	output: {
-		filename: "[name].[contenthash].js",
-		chunkFilename: '[name].[contenthash].js', // 简介引入代码输出的名字
-		path: path.resolve(__dirname, '../dist')
-	}
+  output: {
+    filename: "[name].[contenthash].js",
+    chunkFilename: '[name].[contenthash].js', // 简介引入代码输出的名字
+    path: path.resolve(__dirname, '../dist')
+  }
   ...
 }
 ...
@@ -60,7 +60,7 @@ const prodConfig = {
 ...
 module.exports = {
   ...
-	performance: false, // 关闭性能上的一些问题
+  performance: false, // 关闭性能上的一些问题
   ...
 }
 ...
@@ -82,8 +82,6 @@ const dom = $('<div>');
 - dom.html(_.join(['Hello', 'darrell'], ' '));
 + dom.html(_.join(['Hello', 'darrell123'], ' '));
 $('body').append();
-
-
 ```
 
 重新打包，可以看到打包出来 业务代码内容的 `hash` 变了，而库代码的内容 `hash` 没变。
@@ -112,12 +110,12 @@ $('body').append();
 module.exports = {
   ...
   optimization: {
-		...
-		runtimeChunk: {
-			name: 'runtime',
-		},
-		...
-	},
+    ...
+    runtimeChunk: {
+      name: 'runtime',
+    },
+    ...
+  },
   ...
 }
 ...

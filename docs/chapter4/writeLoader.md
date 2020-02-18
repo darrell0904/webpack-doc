@@ -313,7 +313,7 @@ const commonConfig = {
 
 示例代码可以看这里：
 
-- [loader  示例代码]()
+- [loader  示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter4/loader-demo)
 
 
 

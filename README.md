@@ -134,19 +134,19 @@ sudo vi /etc/hosts
 * [TypeScript 打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/typescript.md)
 * [webpack-dev-server 高级配置](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/webpack_dev_server.md)
 * [配置 EsLint](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/esLint.md)
-* [Webpack 性能优化](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter3/performance-demo)
+* [Webpack 性能优化](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/performance.md)
 * [Webpack 多页面打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/more_page.md)
 
 
 &nbsp;
 ### Webpack 底层原理
-* [如何编写一个 Loader](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter4/loader-demo)
-* [如何编写一个 Plugin](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter4/plugins-demo)
-* [如何编写一个简易的 Webpack](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter4/webpack-demo)
+* [如何编写一个 Loader](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/writeLoader.md)
+* [如何编写一个 Plugin](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/writePlugin.md)
+* [如何编写一个简易的 Webpack](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/writeWebpack.md)
 
 &nbsp;
 ### React、Vue框架脚手架配置分析
-* Create-React-App 中 Webpack 配置
+* [Create-React-App 中 Webpack 配置](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter5/createReactApp.md)
 * Vue-CLI3 中 Webpack 配置
 
 

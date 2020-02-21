@@ -326,7 +326,7 @@ module.exports = {
 
 我们可以看到每个插件上方都添加了使用 `chainWebpack` 访问的方式，同时我也添加了每个插件相应的用途注释。
 
-
+&nbsp;
 
 ## `env` 文件与环境设置
 
@@ -555,7 +555,7 @@ new Vue({
 ## 相关链接
 
 - [Vue Cli 官网](https://cli.vuejs.org/zh/guide/)
-- [Vue Cli 官网 Webpack 配置]([https://cli.vuejs.org/zh/guide/webpack.html#%E7%AE%80%E5%8D%95%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F](https://cli.vuejs.org/zh/guide/webpack.html#简单的配置方式))
+- [Vue Cli 官网 Webpack 配置](https://cli.vuejs.org/zh/guide/webpack.html)
 - [Vue 项目构建与开发入门 掘金小册](https://juejin.im/book/5b23a5aef265da59716fda09/section/5b23b233f265da599911422a#heading-1)
 
 &nbsp;

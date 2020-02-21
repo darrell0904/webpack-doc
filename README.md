@@ -147,7 +147,7 @@ sudo vi /etc/hosts
 &nbsp;
 ### React、Vue框架脚手架配置分析
 * [Create-React-App 中 Webpack 配置](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter5/createReactApp.md)
-* Vue-CLI3 中 Webpack 配置
+* [Vue-CLI3 中 Webpack 配置](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter5/vueCli3.md)
 
 
 

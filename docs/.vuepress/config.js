@@ -66,8 +66,15 @@ module.exports = {
           'chapter3/typescript.md',
           'chapter3/webpack_dev_server.md',
           'chapter3/esLint.md',
-          'chapter3/performance.md',
           'chapter3/more_page.md',
+        ]
+      },
+      {
+        title: 'Webpack 性能优化',
+        collapsable: true,
+        children: [
+          ['chapter6/', 'Webpack 性能优化'],
+          'chapter6/performance.md',
         ]
       },
       {

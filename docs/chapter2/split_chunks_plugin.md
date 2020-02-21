@@ -718,6 +718,7 @@ cacheGroups: {
 - [webpack 官方 demo](https://github.com/webpack/webpack/tree/master/examples/)
 - [一步一步的了解 webpack4 的splitChunk插件](https://juejin.im/post/5af1677c6fb9a07ab508dabb)
 - [webpack v4 中的断舍离 - 代码分离 SplitChunksPlugin](https://juejin.im/post/5b6a4d71f265da0fa8676814)
+- [Webpack4之SplitChunksPlugin规则](https://blog.csdn.net/napoleonxxx/article/details/81975186)
 
 &nbsp;
 

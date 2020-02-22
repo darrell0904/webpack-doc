@@ -75,6 +75,8 @@ module.exports = {
         children: [
           ['chapter6/', 'Webpack 性能优化'],
           'chapter6/performance.md',
+          'chapter6/multi_process.md',
+          'chapter6/dllPlugin.md',
         ]
       },
       {

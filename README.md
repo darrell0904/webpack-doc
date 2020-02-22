@@ -134,11 +134,19 @@ sudo vi /etc/hosts
 * [TypeScript 打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/typescript.md)
 * [webpack-dev-server 高级配置](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/webpack_dev_server.md)
 * [配置 EsLint](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/esLint.md)
-* [Webpack 性能优化](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/performance.md)
 * [Webpack 多页面打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/more_page.md)
 
+&nbsp;
+
+### Webpack 性能优化
+
+* Webpack 实战配置案例
+* [Webpack 优化策略](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter6/performance.md)
+* [使用多进程打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter6/multi_process.md)
+* [使用 DllPlugin 提高打包速度](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter6/dllPlugin.md)
 
 &nbsp;
+
 ### Webpack 底层原理
 * [如何编写一个 Loader](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/writeLoader.md)
 * [如何编写一个 Plugin](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/writePlugin.md)

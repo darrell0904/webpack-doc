@@ -17,9 +17,10 @@ module.exports = {
         collapsable: true,
         children: [
           ['chapter0/', '前端的发展'],
+          'chapter0/module',
           'chapter0/frame',
           'chapter0/language',
-          'chapter0/install',
+          'chapter0/build_tools',
           'chapter0/start',
           'chapter0/supplement',
         ]
@@ -62,6 +63,7 @@ module.exports = {
         children: [
           ['chapter3/', 'Webpack 实战配置案例'],
           'chapter3/library.md',
+          'chapter3/ssr.md',
           'chapter3/pwa.md',
           'chapter3/typescript.md',
           'chapter3/webpack_dev_server.md',

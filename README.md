@@ -89,10 +89,12 @@ sudo vi /etc/hosts
 &nbsp;
 ### 初识 Webpack
 
-* [前端的发展](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/README.md)
+* 前端的发展
+
+* [前端模块化](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/module.md)
 * [新框架](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/frame.md)
 * [新语言](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/language.md)
-* 常见的构建工具及对比
+* [常见的构建工具及对比](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/build_tools.md)
 * [安装webpack](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/start.md)
 * [一些补充](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/supplement.md)
 

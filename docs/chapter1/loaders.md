@@ -1,4 +1,10 @@
-# 配置 loader
+# 配置 Loader
+
+`webpack` 开箱即用只支持 `JS` 和 `JSON` 两种文件类型，需要通过 `Loaders` 去支持其它文 件类型并且把它们转化成有效的模块，并且可以添加到依赖图中。
+
+ `Loaders` 本身是一个函数，接受源文件作为参数，返回转换的结果。
+
+&nbsp;
 
 ## 从打包图片说起
 
@@ -12,7 +18,7 @@ import webpackSrc from './webpack.png';
 
 ![](./img/loader1.png)
 
-为什么会出现这个问题，是因为 `webpack` 默认是知道怎么打包 `js` 文件的，但是碰到其他类型的文件的时候，webpack 就不知道怎么进行打包了，因此我们需要在配置文件里面告诉 `webpack` 对于此类文件**模块**需要怎么进行打包。
+为什么会出现这个问题，是因为 `webpack` 默认是知道怎么打包 `js` 文件的，但是碰到其他类型的文件的时候，webpack 就不知道怎么进行打包了，因此我们需要在配置文件里面告诉 `webpack` 对于此类文件 **模块** 需要怎么进行打包。
 
 于是我们在 `webpack.config.js` 中进行如下配置，添加一个 `module` 配置项：
 
@@ -247,8 +253,6 @@ module: {
 * [url-loader](https://webpack.js.org/loaders/url-loader/)
 * [file-loader](https://webpack.js.org/loaders/file-loader/)
 
-
-
 &nbsp;
 
 ### 打包样式文件（样式篇）
@@ -414,8 +418,6 @@ module.exports = {
 
 上面这个参数的意思就是，通过在 `less` 里面引入的文件 还需要去走下面的两个 `loader`,这就保证了，不管你是 `js` 引入的还是`less` 引入的，都会从下到上依次去走四个 `loader`
 
-
-
 &nbsp;
 
 #### css 模块化
@@ -521,11 +523,9 @@ export default createAvatar;
 
 这样带来的好处就是，我们写的各个模块里的样式文件都只对自己的模块生效，非常独立，不会对其他模块产生影响。
 
-
-
 &nbsp;
 
-#### 打包图标字体
+### 打包图标字体
 
 接下来我们将一下，如何打包图标字体，一般在网站中我们会使用各种各样的图标，那我们如何来使用 `webpack` 打包图标呢？
 
@@ -544,8 +544,6 @@ export default createAvatar;
 我们只需要下面的一些字体文件 `eot`、`svg` 、`woff`、`woff2`、`ttf` 以及应用这些文件的 `iconfont.css`，我们在项目中创建 `fonts` 文件夹，并将上面的字体文件拉入到 `fonts` 文件夹中。同时将 `iconfont.css` 中的文件复制到 index.less中，并修改一下引用路径：
 
 ![](./img/loader16.png)
-
-
 
 同时我们修改一下 `index.js`，插入一个图标文件：
 
@@ -592,7 +590,18 @@ dom.innerHTML = "<div class='iconfont icon-left'></div>"
 * [less-loader](https://webpack.js.org/loaders/less-loader/)
 * [postcss-loader](https://webpack.js.org/loaders/postcss-loader/)
 
+&nbsp;
 
+### 其他常用 `loader`
+
+其他的常用 `loader`，还有诸如：
+
+* [`raw-loader`](https://webpack.js.org/loaders/raw-loader/)：将文件以字符串的形式导入
+* [`thread-loader`](https://webpack.js.org/loaders/thread-loader/)：多进程打包 `js` 和 `css` 的 `loader`，我们会在 **Webpack 性能优化** 中讲到
+* [`babel-loader`](https://webpack.js.org/loaders/babel-loader/)：转换 `ES6`、`ES7` 等 `JS` 新特性语法，我们会在接下去的小结专门讲一下
+* `ts-loader`：将 `typescript` 代码转化为 `js`，我们会在 **Webpack 实战配置案例**  中讲到
+
+其他的还有很多 [`loader`](https://webpack.js.org/loaders/) 是 `Webpack` 官方推荐的， 大家可以在需要用到的时候去查询相应的文档，笔者在这里就不细讲了。
 
 &nbsp;
 
@@ -607,6 +616,3 @@ dom.innerHTML = "<div class='iconfont icon-left'></div>"
 示例代码可以看这里：
 
 - [loader 示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter1/loader-demo)
-
-
-

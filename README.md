@@ -90,7 +90,6 @@ sudo vi /etc/hosts
 ### 初识 Webpack
 
 * 前端的发展
-
 * [前端模块化](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/module.md)
 * [新框架](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/frame.md)
 * [新语言](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter0/language.md)
@@ -110,6 +109,7 @@ sudo vi /etc/hosts
 * [配置 HMR 热更新](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/hot_module_replacement.md)
 * [打包 ES6 代码](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/webpack_babel.md)
 * [打包 React 代码](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/webapck_react.md)
+* [一些补充](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter1/supplement.md)
 
 &nbsp;
 ### Webpack 高级概念
@@ -133,6 +133,7 @@ sudo vi /etc/hosts
 * Webpack 实战配置案例
 * [Library 打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/library.md)
 * [PWA 打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/pwa.md)
+* [SSR 打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/ssr.md)
 * [TypeScript 打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/typescript.md)
 * [webpack-dev-server 高级配置](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/webpack_dev_server.md)
 * [配置 EsLint](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter3/esLint.md)

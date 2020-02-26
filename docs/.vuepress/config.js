@@ -38,6 +38,7 @@ module.exports = {
           'chapter1/hot_module_replacement.md',
           'chapter1/webpack_babel.md',
           'chapter1/webapck_react.md',
+          'chapter1/supplement.md',
         ]
       },
       {

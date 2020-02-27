@@ -48,6 +48,7 @@ module.exports = {
           ['chapter2/', 'Webpack 高级概念'],
           'chapter2/tree_shaking.md',
           'chapter2/mode.md',
+          'chapter2/log.md',
           'chapter2/code_splitting.md',
           'chapter2/split_chunks_plugin.md',
           'chapter2/lazy_loading.md',

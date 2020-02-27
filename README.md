@@ -117,6 +117,7 @@ sudo vi /etc/hosts
 * webpack 的高级概念
 * [配置 Tree Shaking](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/tree_shaking.md)
 * [Develoment 和 Production 模式的区分打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/mode.md)
+* [显示日志和异常处理优化](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/log.md)
 * [Webpack 和 Code Splitting](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/code_splitting.md)
 * [配置 SplitChunksPlugin](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/split_chunks_plugin.md)
 * [配置 Lazy Loading （懒加载）](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/lazy_loading.md)
@@ -160,7 +161,13 @@ sudo vi /etc/hosts
 * [Create-React-App 中 Webpack 配置](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter5/createReactApp.md)
 * [Vue-CLI3 中 Webpack 配置](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter5/vueCli3.md)
 
+&nbsp;
 
+### 一些补充
+
+* 代码部署
+
+&nbsp;
 
 ### 未完待续。。。
 

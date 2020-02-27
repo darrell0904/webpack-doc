@@ -525,6 +525,193 @@ export default createAvatar;
 
 &nbsp;
 
+#### `px2rem-loader`
+
+这个是一个 移动端 css `px` 自动转换为 `rem` 的 `loader`。
+
+有的时候我们需要做移动端的自适应，以前我们可以通过 `css` 媒体查询来实现响应式布局，但是这样的话就需要写多套代码。
+
+这个时候我们就可以使用 `rem` 来进行 `css` 布局，`rem` 是 `CSS3` 新增的一个相对单位。相对于 `html` 根元素。更详细的大家可以参考 [px、em、rem区别介绍](https://www.runoob.com/w3cnote/px-em-rem-different.html)。
+
+我们可以搭配手淘的 [`lib-flexible`](https://github.com/amfe/lib-flexible)，我们首先安装相应的插件：
+
+```shell
+npm install amfe-flexible px2rem-loader -D
+```
+
+接着我们在配置一下：
+
+```javascript
+// ...
+
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+              // modules: true,
+            }
+          },
+          'less-loader',
+          'postcss-loader',
+          {
+            loader: 'px2rem-loader',
+            options: {
+              remUnit: 75, // rem 相对 px 转换的单位，1rem = 75px
+              remPrecision: 8 // px 转化为 rem 小数点的位数
+            }
+          },
+        ]
+      }]
+  },
+	// ...
+}
+```
+
+接着在打包出来的 `index.html` 中引入我们的计算 `font-size` 的代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>模块化问题例子</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <script src="../node_modules/amfe-flexible/index.js"></script>
+</head>
+<body>
+  <div id='root'></div>
+</body>
+</html>
+```
+
+接着我们就可以看到 `px` 可以转化为 `rem` 了：
+
+![](./img/loader18.png)
+
+> 此外 `lib-flexible` 官方也说现在推荐我们使用 `viewport` 来代替它。`vw`的兼容方案可以参阅《[如何在Vue项目中使用vw实现移动端适配](https://www.w3cplus.com/mobile/vw-layout-in-vue.html)》一文。
+>
+> 或者我们还可以使用 [`hotcss`](http://imochen.github.io/hotcss/)，他也是移动端布局开发解决方案之一。
+
+&nbsp;
+
+#### `row-loader`
+
+有的时候我们需要将资源内联到 `html` 中去，我们可以通过 `row-loader` 来内联 `html` 和 `js` 代码。
+
+##### `html`
+
+我们新建一个 `meta.html`，有的时候我们要在多个页面引入，就可以使用内联：
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+```
+
+接着我们在模版文件 `index.html` 使用 `raw-loader`，这里需要注意的是我们需要安装 `0.5.*` 版本的 `row-loader`，此外我们是通过 `html-webpack-plugin` 来生成 `html` 的，我们可以使用 `ejs` 的语法：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>模块化问题例子</title>
+  ${require('raw-loader!./meta.html')}
+  <script src="../node_modules/amfe-flexible/index.js"></script>
+</head>
+<body>
+  <div id='root'></div>
+</body>
+</html>
+```
+
+&nbsp;
+
+##### `js`
+
+上面我们讲到的使用 `lib-flexible`，我们可以使用内联代码来做，但有的时候 `js` 代码可能会有 `es6`，因此我们也需要跑一下 `babel-loader`：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>模块化问题例子</title>
+  ${require('raw-loader!./meta.html')}
+  <script>${require('raw-loader!babel-loader!../node_modules/amfe-flexible')}</script>
+</head>
+<body>
+  <div id='root'></div>
+</body>
+</html>
+```
+
+我们进行打包一下，可以在打包后的 `index.html` 引入了相应的文件：
+
+![](./img/loader19.png)
+
+&nbsp;
+
+##### `css`
+
+内联 `css` ，我们有下面两个方案。
+
+* `style-loader`
+
+我们可以设置相应的参数完成内敛：
+
+```javascript
+// ...
+
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              insertAt: 'top', // 样式插入到 <head>
+              singleton: true, //将所有的style标签合并成一个
+            }
+          },
+          // ...
+        ]
+       }
+     ]
+  },
+	// ...
+}
+```
+
+* [`html-inline-css-webpack-plugin`](https://github.com/Runjuu/html-inline-css-webpack-plugin)
+
+这是用于将外部样式表转换为嵌入式样式表的 `webpack` 插件，配置如下：
+
+```javascript
+...
+const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
+
+module.exports = {
+  // ...
+  plugins: [
+    // ...
+    new HTMLInlineCSSWebpackPlugin(),
+  ],
+  // ...
+}
+```
+
+&nbsp;
+
 ### 打包图标字体
 
 接下来我们将一下，如何打包图标字体，一般在网站中我们会使用各种各样的图标，那我们如何来使用 `webpack` 打包图标呢？

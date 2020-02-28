@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "npx vuepress dev docs",
     "build": "npx vuepress build docs",
-    "remove-catch": "npx vuepress dev docs --no-cache"
+    "remove-catch": "npx vuepress dev docs --no-cache",
+    "deploy": "now ./dist"
   },
   "author": "",
   "license": "ISC",

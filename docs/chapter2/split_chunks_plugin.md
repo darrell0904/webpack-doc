@@ -67,7 +67,87 @@ module.exports = {
 
 我们可以很清楚的看到现在的项目打包出了几个文件。
 
+&nbsp;
 
+## `html-webpack-externals-plugin`
+
+再将 `splitChunksPlugin` 之前，我们先来讲一下 [`html-webpack-externals-plugin`](https://github.com/mmiller42/html-webpack-externals-plugin)，此插件可以将一些公用包提取出来使用 `cdn` 引入，不打入 `bundle` 中：
+
+我们先修改一下 `index.js`，写几行 `react` 代码：
+
+```jsx
+import React, { Component } from 'react';
+import ReactDom from 'react-dom';
+
+class App extends Component {
+	render() {
+		return (
+			<div>
+				hello，React！！！
+			</div>
+		)
+	}
+}
+
+ReactDom.render(<App />, document.getElementById('root'));
+```
+
+我们先打包一下，可以看到如下图：
+
+![](./img/split_chunks_plugin23.png)
+
+可以看到 `bundle` 的大小为 `1.05MB`，接着我们配置一下 `html-webpack-externals-plugin`。
+
+### 安装
+
+```shell
+npm install html-webpack-externals-plugin -D
+```
+
+### 配置
+
+```javascript
+// ...
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
+
+const commonConfig = {
+  // ...
+	plugins: [
+		// ...
+		new HtmlWebpackExternalsPlugin({
+			externals: [
+				{
+					module: 'react', // 模块名称
+					entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js', // 引入的cdn
+					global: 'React', // 创建一个全局对象 React
+				},
+				{
+					module: 'react-dom',
+					entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
+					global: 'ReactDOM',
+				},
+			]
+		}),
+	],
+	// ...
+}
+
+// ...
+```
+
+我们重新打包一下，可以看到 `bundle` 的大小变成了 `10.1KB`：
+
+![](./img/split_chunks_plugin24.png)
+
+同时在打包出来的 `index.html` 中也引入了对应的 `CDN`：
+
+![](./img/split_chunks_plugin25.png)
+
+不过此插件需要和 `html-webpack-plugin` 一起使用，因为需要将 `CDN` 的地址引入到 `html` 中去。
+
+更多的配置文件大家可以参考： [`html-webpack-externals-plugin`](https://github.com/mmiller42/html-webpack-externals-plugin)。
+
+接下来我们就开始讲 `splitChunksPlugin`。
 
 &nbsp;
 

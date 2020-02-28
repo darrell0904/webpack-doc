@@ -102,6 +102,14 @@ module.exports = {
           'chapter5/vueCli3.md',
         ]
       },
+      {
+        title: '一些补充',
+        collapsable: true,
+        children: [
+          ['chapter8/', '一些补充'],
+          'chapter8/deploy.md',
+        ]
+      },
     ],
   }
 }

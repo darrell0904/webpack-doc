@@ -79,14 +79,10 @@ sudo vi /etc/hosts
 
 ![](./images/webpack2.png)
 
-
-
 &nbsp;
 
 ## 项目文章目录
 
-
-&nbsp;
 ### 初识 Webpack
 
 * 前端的发展
@@ -116,6 +112,7 @@ sudo vi /etc/hosts
 
 * webpack 的高级概念
 * [配置 Tree Shaking](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/tree_shaking.md)
+* [Webpack 中的 ScopeHoisting](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/scope_hoisting.md)
 * [Develoment 和 Production 模式的区分打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/mode.md)
 * [显示日志和异常处理优化](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/log.md)
 * [Webpack 和 Code Splitting](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter2/code_splitting.md)
@@ -165,11 +162,17 @@ sudo vi /etc/hosts
 
 ### 一些补充
 
-* 代码部署
+* [代码部署](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter8/deploy.md)
 
 &nbsp;
 
 ### 未完待续。。。
+
+&nbsp;
+
+## 文档地址
+
+文档地址：[webpack-doc 学习文档](https://webpack-doc-20200228.now.sh/)
 
 
 &nbsp;

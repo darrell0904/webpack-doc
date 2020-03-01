@@ -77,10 +77,22 @@ module.exports = {
         title: 'Webpack 性能优化',
         collapsable: true,
         children: [
-          ['chapter6/', 'Webpack 性能优化'],
+          ['chapter6/', '性能优化 总览'],
           'chapter6/performance.md',
           'chapter6/multi_process.md',
           'chapter6/dllPlugin.md',
+        ]
+      },
+      {
+        title: '编写可维护 Webpack 构建配置',
+        collapsable: true,
+        children: [
+          ['chapter7/', '总览'],
+          'chapter7/design.md',
+          'chapter7/test.md',
+          'chapter7/ci.md',
+          'chapter7/npm.md',
+          'chapter7/standard.md',
         ]
       },
       {

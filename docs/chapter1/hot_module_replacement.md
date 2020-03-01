@@ -6,8 +6,6 @@
 
 一般如果我们使用了 `webpack-dev-server`，当我们修改了项目中的文件的时候，一般会重新刷新一下页面，这会导致我们刚刚在页面中操作的东西都被还原。
 
-
-
 &nbsp;
 
 ## 举两个🌰
@@ -60,8 +58,6 @@ div:nth-of-type(odd) {
 ![](./img/hmr2.png)
 
 ![](./img/hmr3.png)
-
-
 
 &nbsp;
 
@@ -158,8 +154,6 @@ export default counter;
 
 要解决上面两个问题，我们就需要使用 `HMR` 了。
 
-
-
 &nbsp;
 
 ## 配置
@@ -252,15 +246,49 @@ if(module.hot) {
 
 至此， `js` 热更新成功。
 
-
-
 &nbsp;
 
 ## 实现原理
 
+来看一张图，如下：
 
+![](./img/hmr12.png)
 
+先来讲几个概念：
 
+* `File System`
+
+代表我们的文件系统，里面有我们的所有代码文件
+
+* `Webpack Compile`
+
+`Webpack` 的编译器，将 `JS` 编译成 `Bundle` 
+
+* `HMR Server`
+
+将热更新的文件输出给 `HMR Rumtime`
+
+* `Bundle server`
+
+提供文件在浏览器器的访问
+
+* `HMR Rumtime`
+
+客户端 `HMR` 的中枢，用来更新文件的变化，与 `HMR server` 通过 `websocket` 保持长链接，由此传输热更新的文件
+
+* `bundle.js`
+
+代表构建出来的文件
+
+&nbsp;
+
+### 大致流程
+
+分为两个流程，一个是文件系统的文件通过 `webpack` 的编译器进行编译，接着被放到 `Bundle Server` 服务器上，也就是 `1 -> 2 -> A -> B` 的流程；
+
+第二个流程是，当文件系统发生改变的时候，`Webpack` 会重新编译，将更新后的代码发送给了 `HMR SServer`，接着便通知给了 `HMR Runtime`，一般来说热更新的文件或者说是 `module` 是以 `json` 的形式传输给 浏览器的 `HMR Runtime` 的，最终 `HMR Runtime` 就会更新我们前端的代码。
+
+更加详细的解读大家可以参考 [HMR 原理](https://zhuanlan.zhihu.com/p/30669007)，写的巨详细。
 
 &nbsp;
 
@@ -268,8 +296,7 @@ if(module.hot) {
 
 * [HMR 使用](https://webpack.js.org/concepts/hot-module-replacement/)
 * [HMR 相关API](https://webpack.js.org/api/hot-module-replacement/)
-
-
+* [HMR 原理](https://zhuanlan.zhihu.com/p/30669007)
 
 &nbsp;
 

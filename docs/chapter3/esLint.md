@@ -2,6 +2,18 @@
 
 今天我们来讲一下 `webpack` 中 `eslint` 的配置。
 
+## 行业里⾯优秀的 `ESLint` 规范实践
+
+### [`Airbnb`](https://github.com/airbnb/javascript)：
+
+* `eslint-config-airbnb`
+* `eslint-config-airbnb-base`：提供了 `Airbnb` 的基础 `.eslintrc`（无 `React` 插件）作为可扩展的共享配置。
+
+### 腾讯：
+
+* `alloyteam` 团队：[`eslint-config-alloy`](https://github.com/AlloyTeam/eslint-config-alloy)
+* `ivweb` 团队：[`eslint-config-ivweb`](https://github.com/feflow/eslint-config-ivweb)
+
 &nbsp;
 
 ## Eslint 使用
@@ -137,15 +149,29 @@ module.exports = {
 
 ![](./img/eslint5.png)
 
-
-
 到目前为止，我们还是没有使用到 `webpack` 的，那么接下来我们就来讲讲在 `webpack` 中使用 `eslint`：
-
- 
 
 &nbsp;
 
-## 在 `webpack` 中使用
+## 制定团队的 `ESLint` 规范
+
+我们不需要要重复造轮子，可以基于 `eslint:recommend` 配置并改进。将能够帮助发现代码错误的规则，全部开启来，其余的进可以根据自己的项目要求适当的进行调整。
+
+```javascript
+module.exports = {
+  // ...
+  "extends": "eslint:recommended", // 使用 eslint 配置文件
+  // ...
+};
+```
+
+需要明确的事： `eslint` 的作用是帮助我们团队代码风格进行统一，而不是限制我们的开发体验，部分配置可以参照下图：
+
+![](./img/eslint11.png)
+
+&nbsp;
+
+## 和 `webpack` 集成
 
 我们需要安装对应 `eslint-loader`，来帮助我们在 `webpack` 中进行配置。
 
@@ -230,13 +256,15 @@ const devConfig = {
 
 
 
-## 真实项目配置
+## 和 `CI/CD` 系统集成
 
-在真实项目中我们一般不会在 `webpack` 中配置 `eslint-loader`，因为如果配置了会不可避免的对打包性能上有所损耗。
+一般在真实项目中我们一般不会在 `webpack` 中配置 `eslint-loader`，因为如果配置了会不可避免的对打包性能上有所损耗。
 
 因此我们一般的做法是，在提交代码到代码仓库的时候，去跑一下 `eslint`，只有符合代码规范的代码才能提交到仓库中去。
 
-如果项目使用了 `git`，可以通过使用 `pre-commit` 钩子在每次 **提交前检测**，如果检测失败则禁止提交。可以在很大一定程度上保证代码质量。
+如果项目使用了 `git`，可以通过使用 `pre-commit` 钩子在每次 **提交前检测**，如果检测失败则禁止提交。可以在很大一定程度上保证代码质量，如下图所示：
+
+![](./img/eslint10.png)
 
 这里我们使用了 `pre-commit` 包来帮助我们实现这一目标。
 
@@ -257,15 +285,11 @@ npm install pre-commit -D
 ]
 ```
 
-我们还可以使用 `husky` 来满足我们的需求，具体笔者就不多讲了，大家可以参考 [husky 官网](https://github.com/typicode/husky)
+我们还可以使用 `husky` 来满足我们的需求，具体笔者就不多讲了，大家可以参考 [husky 官网](https://github.com/typicode/husky)。
 
-
-
-
+&nbsp;
 
 ## 在编辑器中安装插件
-
-
 
 &nbsp;
 

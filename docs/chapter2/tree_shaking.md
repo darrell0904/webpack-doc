@@ -38,8 +38,6 @@ webpack --config ./config/webpack.dev.js
 
 其实在这个时候我们不需要打包 `minus` 这个方法了。
 
-
-
 &nbsp;
 
 ## 相关配置
@@ -48,11 +46,11 @@ webpack --config ./config/webpack.dev.js
 
 ```javascript
 const devConfig = {
-  ...
+  // ...
   optimization: {
     usedExports: true,
   },
-  ...
+  // ...
 }
 ```
 
@@ -64,7 +62,7 @@ const devConfig = {
   "version": "1.0.0",
   "description": "",
   "sideEffects": false, // 对所有的文件都启用 tree_shaking
-  ...
+  // ...
 }
 ```
 
@@ -90,13 +88,11 @@ webpack --config ./config/webpack.prod.js
 >
 > ```javascript
 > optimization: {
->   usedExports: true,
+>     usedExports: true,
 > },
 > ```
 >
 > `webpack` 默认帮我们在线上环境开启了 `tree_shaking`
-
-
 
 &nbsp;
 
@@ -145,8 +141,6 @@ header();
 
 
 
-
-
 我们运行一下 `npm run dev`，我们会发现页面的字体变红了：
 
 ![](./img/tree_shaking4.png)
@@ -156,8 +150,6 @@ header();
 接着我们运行一下 `npm run build`，打开 `index.html`，这个时候我们会发现，页面中的字体没有变红，这是为什么呢。
 
 ![](./img/tree_shaking5.png)
-
-
 
 &nbsp;
 
@@ -196,19 +188,13 @@ import '@babel/polly-fill'
 
 ![](./img/tree_shaking6.png)
 
-
-
 &nbsp;
 
 ## `tree-shaking` 的局限性
 
 * 只能是静态声明和引用的 `ES6` 模块，不能是动态引入和声明的。
 
-而CommonJS模块，所以不能对CommonJS模块进行tree-shaking处理。
-
-`CommonJS` 模块是支持动态结构，它通过 `require()` 引入模块，所以是不能被 `tree-shaking` 进行处理的。
-
-在打包阶段对冗余代码进行删除，就需要 `webpack` 需要在打包阶段确定模块文件的内部结构，而 `ES` 模块的引用和输出必须出现在文件结构的第一级 `（'import' and 'export' may only appear at the top level）`，否则会报错。
+在打包阶段对冗余代码 (`uglify`) 进行删除，就需要 `webpack` 需要在打包阶段确定模块文件的内部结构，而 `ES` 模块的引用和输出必须出现在文件结构的第一级 `（'import' and 'export' may only appear at the top level）`，否则会报错。
 
 ```javascript
 // webpack编译时会报错
@@ -219,19 +205,15 @@ if (condition) {
 }
 ```
 
-
+而 `CommonJS` 模块是支持动态结构，它通过 `require()` 引入模块，所以是不能被 `tree-shaking` 进行处理的。
 
 * 只能处理模块级别，不能处理函数级别的冗余；
 
 因为 `webpack` 的 `tree-shaking` 是基于模块间的依赖关系，所以并不能对模块内部自身的无用代码进行删除。
 
-
-
 * 只能处理 `JS` 相关冗余代码，不能处理 `CSS` 冗余代码。
 
-目前 `webpack` 只对 `JS` 文件的依赖进行了处理，`CSS` 的冗余并没有给出很好的工具。
-
-
+目前 `webpack` 只对 `JS` 文件的依赖进行了处理，`CSS` 的冗余并没有给出很好的工具。可以借助 `PureCss` 来完成这个目的。
 
 &nbsp;
 
@@ -240,8 +222,6 @@ if (condition) {
 * [webpack官网 tree_shaking](https://webpack.js.org/guides/tree-shaking/)
 * [webpack中tree-shaking技术介绍](https://www.cnblogs.com/wmhuang/p/7905972.html)
 
-
-
 &nbsp;
 
 ## 示例代码
@@ -249,4 +229,3 @@ if (condition) {
 示例代码可以看这里：
 
 * [Tree Shaking  示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter2/tree-shaking-demo)
-

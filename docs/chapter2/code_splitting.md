@@ -1,6 +1,12 @@
 # webpack 和 Code Splitting
 
-今天讲一下 `webpack` 中的代码分割，和 `webpack` 无关，为了提升性能 `webpack` 中实现代码分割，两种方式:
+今天讲一下 `webpack` 中的代码分割，
+
+对于大的 `Web` 应用来讲，将所有的代码都放在一个文件中显然是不够有效的，特别是当你的某些代码块是在某些特殊的时候才会被使用到。`webpack` 有一个功能就是将你的代码库分割成 **`chunks`(语块)**，当代码运行到需要它们的时候再进行加载。
+
+显而易见能帮我们提升代码的性能，使用户体验更好。
+
+实际上和 `webpack` 无关，`webpack` 只是可以帮助我们更简单的实现代码分割。两种方式:
 
 &nbsp;
 
@@ -54,17 +60,17 @@ console.log(_.join(['a', 'b', 'c'], '***'));
 接着我们修改一下 `webpack` 配置文件 `webpack.common.js`：
 
 ```javascript
-...
+// ...
 
 module.exports = {
   entry: {
     lodash: './src/lodash.js',
     main: './src/index.js',
   },
-  ...
+  // ...
 }
 
-...
+// ...
 ```
 
 我们打包一下 `npm run bundle`，我们可以 `dist` 目录多生成了 `lodash.js`
@@ -110,7 +116,7 @@ module.exports = {
 这个很简单只需要在 `webpack.dev.js` 中做 `optimization` 的配置即可。
 
 ```javascript
-...
+// ...
 
 optimization: {
   splitChunks: {
@@ -118,22 +124,22 @@ optimization: {
   }
 },
 
-...
+// ...
 ```
 
 我们将  `webpack.common.js` 中的  `entry` 中配置的 `lodash` 去掉。
 
 ```javascript
-...
+// ...
 
 module.exports = {
   entry: {
     main: './src/index.js',
   },
-  ...
+  // ...
 }
 
-...
+// ...
 ```
 
  接着我们重新打包一下 `npm run bundle`，我们可以看到 `dist` 下面的内容：
@@ -151,6 +157,11 @@ module.exports = {
 ### 异步引入，分割代码(import): 
 
 异步代码引入切割代码，我们无需做任何配置，会自动进行代码分割，放置到新的文件中。
+
+#### 实现方式
+
+* `CommonJs`：使用 [`require.ensure`](https://www.html.cn/doc/webpack2/guides/code-splitting-require/) 来实现
+* `ES6`：动态 `import`，我们接下去的例子
 
 我们新建一个 `async.js` 文件，用于异步导入 `lodash`：
 
@@ -211,13 +222,9 @@ npm i babel-plugin-dynamic-import-webpack -D
 
 接着我们重新打包就可以使用这类语法了。
 
-
-
 &nbsp;
 
 ## 相关链接：
-
-
 
 &nbsp;
 

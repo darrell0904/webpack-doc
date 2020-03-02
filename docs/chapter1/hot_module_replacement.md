@@ -286,9 +286,28 @@ if(module.hot) {
 
 分为两个流程，一个是文件系统的文件通过 `webpack` 的编译器进行编译，接着被放到 `Bundle Server` 服务器上，也就是 `1 -> 2 -> A -> B` 的流程；
 
-第二个流程是，当文件系统发生改变的时候，`Webpack` 会重新编译，将更新后的代码发送给了 `HMR SServer`，接着便通知给了 `HMR Runtime`，一般来说热更新的文件或者说是 `module` 是以 `json` 的形式传输给 浏览器的 `HMR Runtime` 的，最终 `HMR Runtime` 就会更新我们前端的代码。
+第二个流程是，当文件系统发生改变的时候，`Webpack` 会重新编译，将更新后的代码发送给了 `HMR Server`，接着便通知给了 `HMR Runtime`，一般来说热更新的文件或者说是 `module` 是以 `json` 的形式传输给 浏览器的 `HMR Runtime` 的，最终 `HMR Runtime` 就会更新我们前端的代码。
 
-更加详细的解读大家可以参考 [HMR 原理](https://zhuanlan.zhihu.com/p/30669007)，写的巨详细。
+要注意的几个点：
+
+* `webpack-dev-server` 是将打包的代码放到内存之中，不是在 `output` 指定的目录之下，这样能使 `webpack` 速度更快。
+* `webpack-dev-server` 底层是基于 [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware) 这个库的，他能调用 `webpack` 相关的 `Api` 对代码变化进行监控，并且告诉 `webpack`，将代码打包到内存中。
+* `Websocket  ` 不会将更新好的代码直接发给服务器端，而是发一个更新模块的哈希值，真正处理这个 `hash` 的还是 `webpack`。
+
+![](./img/hmr13.png)
+
+* 浏览器端 `HMR.runtime ` 会根据最新的 `hash` 值，向服务器端拿到所有要更新的模块的 `hash` 值，接着再通过一个 `jsonp` 请求来获取这些 `hash` 对应的最新模块代码。
+
+![](./img/hmr14.png)
+
+![](./img/hmr15.png)
+
+* 浏览器端拿到最新的更新代码后，如我们在配置文件中配置的一样，是根据 `HotModuleReplacementPlugin` 对新旧模块进行对比，决定是否更新模块，在决定更新模块后，检查模块之间的依赖关系，更新模块的同时更新模块间的依赖引用。
+* 当模块的热替换过程中，如果替换模块失败，就会会推倒 `live reload` 操作，也就是进行浏览器刷新来获取最新打包代码。
+
+更加详细的解读大家可以参考 [Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)，写的巨详细。大家有兴趣也可以看看源码，不必太深入，有一个大致了解即可。
+
+之后有时间笔者也会专门针对这个原理写一篇文章。
 
 &nbsp;
 
@@ -296,7 +315,12 @@ if(module.hot) {
 
 * [HMR 使用](https://webpack.js.org/concepts/hot-module-replacement/)
 * [HMR 相关API](https://webpack.js.org/api/hot-module-replacement/)
-* [HMR 原理](https://zhuanlan.zhihu.com/p/30669007)
+* [Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
+* [Webpack 热更新实现原理分析](https://zhuanlan.zhihu.com/p/30623057)
+* [使用服务器发送事件](https://developer.mozilla.org/zh-CN/docs/Server-sent_events/Using_server-sent_events)
+* [webpack-dev-server 仓库](https://github.com/webpack/webpack-dev-server)
+* [webpack 仓库](https://github.com/webpack/webpack/tree/master/hot)
+* [webpack 热更新相关代码](https://github.com/webpack/webpack/tree/master/lib/hmr)
 
 &nbsp;
 

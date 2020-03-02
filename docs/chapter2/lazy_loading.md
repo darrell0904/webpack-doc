@@ -107,15 +107,11 @@ export default getComponent;
 
 ```
 
-
-
 &nbsp;
 
 ## 相关链接
 
 * [webpack 官网 lazy loading](https://webpack.js.org/guides/lazy-loading/)
-
-
 
 &nbsp;
 

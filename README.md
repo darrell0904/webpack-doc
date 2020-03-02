@@ -141,10 +141,21 @@ sudo vi /etc/hosts
 
 ### Webpack 性能优化
 
-* Webpack 实战配置案例
+* 性能优化 总览
 * [Webpack 优化策略](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter6/performance.md)
 * [使用多进程打包](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter6/multi_process.md)
 * [使用 DllPlugin 提高打包速度](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter6/dllPlugin.md)
+
+&nbsp;
+
+### 编写可维护 Webpack 构建配置
+
+* 总览
+* [构建包设计与规范](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter7/design.md)
+* 构建包测试
+* 持续集成 CI
+* 发布到 npm
+* git commit 及 语义化规范
 
 &nbsp;
 

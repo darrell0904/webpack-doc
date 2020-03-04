@@ -152,7 +152,7 @@ sudo vi /etc/hosts
 
 * 总览
 * [构建包设计与规范](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter7/design.md)
-* 构建包测试
+* [构建包测试](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter7/test.md)
 * 持续集成 CI
 * 发布到 npm
 * git commit 及 语义化规范

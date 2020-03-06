@@ -7,12 +7,22 @@
     "dev": "npx vuepress dev docs",
     "build": "npx vuepress build docs",
     "remove-catch": "npx vuepress dev docs --no-cache",
-    "deploy": "now ./dist"
+    "deploy": "now ./dist",
+    "commitmsg": "validate-commit-msg", 
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+  },
+  "config": {
+    "ghooks": {
+      "commit-msg": "npm run commitmsg"
+    }
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "conventional-changelog-cli": "^2.0.31",
+    "husky": "^4.2.3",
     "serialize-javascript": "^2.1.1",
+    "validate-commit-msg": "^2.14.0",
     "vuepress": "^1.2.0"
   }
 }

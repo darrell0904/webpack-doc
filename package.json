@@ -13,8 +13,6 @@
   "author": "darrell",
   "license": "ISC",
   "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-angular": "^8.3.4",
     "conventional-changelog-cli": "^2.0.31",
     "husky": "^4.2.3",
     "serialize-javascript": "^2.1.1",

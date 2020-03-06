@@ -15,6 +15,7 @@
 ## 相关链接
 
 - [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
+- [git commit 规范指南](https://segmentfault.com/a/1190000009048911)
 
 &nbsp;
 

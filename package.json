@@ -11,9 +11,9 @@
     "commitmsg": "validate-commit-msg", 
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
-  "config": {
-    "ghooks": {
-      "commit-msg": "npm run commitmsg"
+  "husky": {
+    "hooks": {
+      "commit-msg": "validate-commit-msg"
     }
   },
   "author": "",

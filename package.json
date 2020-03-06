@@ -8,8 +8,12 @@
     "build": "npx vuepress build docs",
     "remove-catch": "npx vuepress dev docs --no-cache",
     "deploy": "now ./dist",
-    "commitmsg": "validate-commit-msg",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+  },
+  "husky": {
+    "hooks": {
+      "commitmsg": "validate-commit-msg"
+    }
   },
   "author": "",
   "license": "ISC",

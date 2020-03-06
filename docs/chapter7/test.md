@@ -257,7 +257,8 @@ npm install istanbul -D
 "scripts": {
   // ...
   "test:smoke": "node ./test/smoke/index.js",
-  "test:unit": "istanbul cover mocha"
+  "test:unit": "istanbul cover mocha",
+  "test": "npm run test:smoke && npm run test:unit" // 代表同时执行以上两个命令
 },
 ```
 
@@ -281,6 +282,7 @@ npm install istanbul -D
 - [jest](https://jestjs.io/)
 - [测试框架 Mocha 实例教程](http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html)
 - [前端测试框架 Jest](https://juejin.im/post/597aa518f265da3e345f3262)
+- [测试框架 Mocha 实例教程](http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html)
 
 &nbsp;
 

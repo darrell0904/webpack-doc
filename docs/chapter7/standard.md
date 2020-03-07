@@ -159,7 +159,7 @@ fi
 
 ```diff
 + # $PATH是已有目录
-+ PATH=$PATH:/usr/local/bin:/usr/local/sbin
++ PATH=$PATH:/usr/local/bin:/usr/local
 ```
 
 这个时候在 `sourceTree` 上提交钩子就会生效了：
@@ -168,7 +168,7 @@ fi
 
 或者我们直接使用 `.huskyrc.js` 配置文件，那么就只需要加一行路径代码就 `ok` 了。
 
-
+#### 其他工具
 
 除了 `validate-commit-msg`，我们其实还可以使用 [`commitlint`](https://github.com/conventional-changelog/commitlint) 来帮我们验证 `commit` 是否规范，笔者在这里就不细讲了。
 
@@ -195,8 +195,6 @@ angular -i CHANGELOG.md -s -r 0
 在提交发布之前运行一下这个命令就 `ok` 了，下图是生成的 `change log` 文件的例子，大家可以试一试：
 
 ![](./img/git7.png)
-
-
 
 
 

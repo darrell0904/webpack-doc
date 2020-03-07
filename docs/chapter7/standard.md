@@ -136,11 +136,69 @@ npm install validate-commit-msg husky -D
 
 如果你使用的 `sourceTree` 作为 `git` 的提交工具，你可能会发现在命令行中是可以出现错误的，但是 `sourceTree` 有的时候不会提示错误。
 
-我们可以看一下 `.git/husky.sh` 文件，在 `sourceTree` 中
+我们可以看一下 `.git/husky.sh` 文件，在 `sourceTree` 貌似只能识别 `.huskyrc.js`、`husky.config.js` 这两个文件，如果我们的配置文件是 `.huskyrc` 的，则需要在代码里面在新增 `.huskyrc`：
+
+```diff
+# Skip fast if hookName is not defined
+# Don't skip if .huskyrc.js or .huskyrc.config.js are used as the heuristic could
+# fail due to the dynamic aspect of JS. For example:
+# `"pre-" + "commit"` or `require('./config/hooks')`)
+- if [ ! -f .huskyrc.js ] && [ ! -f husky.config.js ] && ! hookIsDefined; then
++ if [ ! -f .huskyrc.js ] && [ ! -f husky.config.js ] && [ ! -f .huskyrc ] && ! hookIsDefined; then
+  debug "$hookName config not found, skipping hook"
+  echo "$hookName config not found, skipping hook"
+  exit 0
+fi
+```
+
+这个时候我们使用 `sourceTree` 提交，会发现另外一个问题，就是 `npx` 找不到，
+
+![](./img/git5.png)
+
+这是我们需要在加一个路径，我们在 `.git/husky.sh` 头部加上下面几行代码：
+
+```diff
++ # $PATH是已有目录
++ PATH=$PATH:/usr/local/bin:/usr/local/sbin
+```
+
+这个时候在 `sourceTree` 上提交钩子就会生效了：
+
+![](./img/git6.png)
+
+或者我们直接使用 `.huskyrc.js` 配置文件，那么就只需要加一行路径代码就 `ok` 了。
 
 
 
-初次之外，我们其实还可以使用 [`commitlint`](https://github.com/conventional-changelog/commitlint) 来帮我们验证 `commit` 是否规范，笔者在这里就不细讲了。
+除了 `validate-commit-msg`，我们其实还可以使用 [`commitlint`](https://github.com/conventional-changelog/commitlint) 来帮我们验证 `commit` 是否规范，笔者在这里就不细讲了。
+
+&nbsp;
+
+### 生成 `changeLog`
+
+如果你的所有 `Commit` 都符合 `Angular` 格式，那么发布新版本时， `Change log` 就可以用脚本自动生成。我们可以借助 [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) 帮我们生成 `Change log` 的工具，运行下面的命令即可。
+
+```shell
+conventional-changelog -p
+angular -i CHANGELOG.md -s -r 0
+```
+
+我们可以在 `package.json` 中配置相应的 `scripts` 命令：
+
+```json
+"scripts": {
+  // ...
+  "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+},
+```
+
+在提交发布之前运行一下这个命令就 `ok` 了，下图是生成的 `change log` 文件的例子，大家可以试一试：
+
+![](./img/git7.png)
+
+
+
+
 
 
 

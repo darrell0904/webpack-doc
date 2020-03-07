@@ -132,9 +132,11 @@ npm install validate-commit-msg husky -D
 
 ![](./img/git4.png)
 
-`sourceTree`
+#### `sourceTree`
 
-如果你使用的 `sourceTree` 作为 `git` 的提交工具，你可能会发现
+如果你使用的 `sourceTree` 作为 `git` 的提交工具，你可能会发现在命令行中是可以出现错误的，但是 `sourceTree` 有的时候不会提示错误。
+
+我们可以看一下 `.git/husky.sh` 文件，在 `sourceTree` 中
 
 
 

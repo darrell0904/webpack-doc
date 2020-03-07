@@ -153,9 +153,9 @@ sudo vi /etc/hosts
 * 总览
 * [构建包设计与规范](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter7/design.md)
 * [构建包测试](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter7/test.md)
-* 持续集成 CI
-* 发布到 npm
-* git commit 及 语义化规范
+* [持续集成 CI](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter7/ci.md)
+* [发布到 npm](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter7/npm.md)
+* [git commit 及 语义化规范](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter7/standard.md)
 
 &nbsp;
 

@@ -11,11 +11,6 @@
     "commit-msg": "validate-commit-msg",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "validate-commit-msg"
-    }
-  },
   "author": "darrell",
   "license": "ISC",
   "devDependencies": {

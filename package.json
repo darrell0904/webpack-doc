@@ -19,7 +19,7 @@
   "license": "ISC",
   "devDependencies": {
     "conventional-changelog-cli": "^2.0.31",
-    "husky": "^0.13.1",
+    "husky": "^4.2.3",
     "serialize-javascript": "^2.1.1",
     "validate-commit-msg": "^2.14.0",
     "vuepress": "^1.2.0"

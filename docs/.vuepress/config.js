@@ -99,17 +99,20 @@ module.exports = {
         title: 'Webpack 底层原理',
         collapsable: true,
         children: [
-          ['chapter4/', 'Webpack 底层原理'],
+          ['chapter4/', '总览'],
+          'chapter4/webpack_start.md',
+          'chapter4/webpack_tapable.md',
+          'chapter4/webpack_process.md',
+          'chapter4/writeWebpack.md',
           'chapter4/writeLoader.md',
           'chapter4/writePlugin.md',
-          'chapter4/writeWebpack.md',
         ]
       },
       {
         title: 'React、Vue框架脚手架配置分析',
         collapsable: true,
         children: [
-          ['chapter5/', 'React、Vue框架脚手架配置分析'],
+          ['chapter5/', '总览'],
           'chapter5/createReactApp.md',
           'chapter5/vueCli3.md',
         ]

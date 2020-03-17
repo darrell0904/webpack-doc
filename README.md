@@ -163,7 +163,7 @@ sudo vi /etc/hosts
 
 * 总览
 * [Webpack 启动过程分析](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/webpack_start.md)
-* webpack 与 Tapable
+* [Tapable 与 Webpack](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/webpack_tapable.md)
 * Webpack 打包流程分析
 
 * [如何编写一个简易的 Webpack](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/writeWebpack.md)

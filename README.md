@@ -162,12 +162,11 @@ sudo vi /etc/hosts
 ### Webpack 底层原理
 
 * 总览
+* [Webpack 调试](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/webpack_debug.md)
 * [Webpack 启动过程分析](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/webpack_start.md)
 * [Tapable 与 Webpack](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/webpack_tapable.md)
-* Webpack 打包流程分析
-
+* [Webpack 打包流程分析](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/webpack_process.md)
 * [如何编写一个简易的 Webpack](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/writeWebpack.md)
-
 * [如何编写一个 Loader](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/writeLoader.md)
 * [如何编写一个 Plugin](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter4/writePlugin.md)
 

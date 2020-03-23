@@ -100,6 +100,7 @@ module.exports = {
         collapsable: true,
         children: [
           ['chapter4/', '总览'],
+          'chapter4/webpack_debug.md',
           'chapter4/webpack_start.md',
           'chapter4/webpack_tapable.md',
           'chapter4/webpack_process.md',

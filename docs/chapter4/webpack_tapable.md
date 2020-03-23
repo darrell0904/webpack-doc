@@ -382,6 +382,7 @@ compiler.run();
 - [tapable 官网 api](https://github.com/webpack/tapable)
 - [webpack详解](https://segmentfault.com/a/1190000013657042)
 - [这才是官方的tapable中文文档](https://segmentfault.com/a/1190000017420937)
+- [基于数据结构从源码解析webpack核心模块tapable](https://blog.csdn.net/qdmoment/article/details/102833305)
 - [Webpack 源码（一）—— Tapable 和 事件流](https://segmentfault.com/a/1190000008060440)
 
 &nbsp;

@@ -412,11 +412,333 @@ buildModule(module, optional, origin, dependencies, thisCallback) {
 
 在创建完 `NormalModule` 实例之后会调用 `NormalModule.build()` 方法继续进行内部的构建，`NormalModule.build()` 会调用 `NormalModule.doBuild()`，在 `doBuild` 中执行 `loader`，生成 `AST` 语法树。
 
+```javascript
+// webpack 4.41.5
+// lib/NormalModule.js
+doBuild(options, compilation, resolver, fs, callback) {
+  const loaderContext = this.createLoaderContext(
+    resolver,
+    options,
+    compilation,
+    fs
+  );
+  
+  runLoaders(
+    {
+      resource: this.resource,
+      loaders: this.loaders,
+      context: loaderContext,
+      readResource: fs.readFile.bind(fs)
+    },
+    (err, result) => {
+      // ...
+      if (err) {
+        // ...
+        return callback(error);
+      }
+
+      const resourceBuffer = result.resourceBuffer;
+      const source = result.result[0];
+      const sourceMap = result.result.length >= 1 ? result.result[1] : null;
+      const extraInfo = result.result.length >= 2 ? result.result[2] : null;
+			// ...
+      // 这里是处理后的源码
+      this._source = this.createSource(
+        this.binary ? asBuffer(source) : asString(source),
+        resourceBuffer,
+        sourceMap
+      );
+      this._sourceSize = null;
+
+      // 这里是ast
+      this._ast =
+        typeof extraInfo === "object" &&
+        extraInfo !== null &&
+        extraInfo.webpackAST !== undefined
+        ? extraInfo.webpackAST
+      		: null;
+      return callback();
+    }
+  );
+}
+```
+
+当一个模块编译成功之后，有会根据其 `AST` 查找依赖，递归整个构建流程，直到整个所有依赖都被处理完毕。得到 所有的 modules 之后，Webpack 会开始生成对应的 chunk。
+
+查找依赖的过程是在 `doBuild` 的 `callback` 函数中使用 `lib/Parser.js` 这个函数来查找 `AST` 中的依赖，他是基于 [`acorn`](https://github.com/acornjs/acorn) 这个工具来进行依赖分析的。
+
+```javascript
+// webpack 4.41.5
+// lib/NormalModule.js
+build(options, compilation, resolver, fs, callback) {
+  // ...
+  return this.doBuild(options, compilation, resolver, fs, err => {
+    this._cachedSources.clear();
+
+    // if we have an error mark module as failed and exit
+    if (err) {
+      this.markModuleAsErrored(err);
+      this._initBuildHash(compilation);
+      return callback();
+    }
+    
+    // ...
+		// 遍历 AST 或者 源码 查找相关依赖
+    try {
+      const result = this.parser.parse(
+        this._ast || this._source.source(),
+        {
+          current: this,
+          module: this,
+          compilation: compilation,
+          options: options
+        },
+        (err, result) => {
+          if (err) {
+            handleParseError(err);
+          } else {
+            handleParseResult(result);
+          }
+        }
+      );
+      if (result !== undefined) {
+        // parse is sync
+        handleParseResult(result);
+      }
+    } catch (e) {
+      handleParseError(e);
+    }
+  });
+}
+```
+
+chunk 的生成算法如下：
+
+1. Webpack 先将 entry 中对应的 module 都生成一个新的 chunk；
+
+2. 遍历 module 的依赖列表，将依赖的 module 也加入到 chunk 中；
+
+3. 如果一个依赖module是动态引入(import()、require.ensure())的模块，那么就会根据这个module创建一
+
+   个新的 chunk，继续遍历依赖;
+
+4. 重复上面的过程，直至得到所有的 chunks。
+
+得到所有的 `chunks` 之后，`webpack` 会进入 `Compilation.seal()` 阶段，在这个阶段会对 `chunks` 和 `modules` 进行一些优化相关的操作，比如分配 `id`，排序，创建 `hash` 等，这个时候就会触发 `webpack.optimize` 配置中的用到的插件。
+
+更多的 `seal` 阶段的操作，大家可以到 `lib/Compilation.js` 中去查看。
+
+到这里，编译阶段结束了，到了产出阶段。
+
+&nbsp;
+
+### 产出阶段
+
+在产出阶段，webpack 会根据 chunks 生成最终文件。主要有三个步骤：模板 hash 更新，模板渲染 chunk，生成 bunlde 文件。
+
+Compilation 在实例化的时候，就会同时实例化三个对象：`mainTemplate`，`chunkTemplate` ，`moduleTemplate` ， 这三个对象是用来渲染 chunk 对象，得到最终代码的模板。
+
+* `mainTemplate`：对应了在 entry 配置的入口 chunk 的渲染模板;
+* `chunkTemplate`：动态引入的非入口 chunk 的渲染模板;
+* `moduleTemplate`：chunk 中的 module 的渲染模板。
+
+在开始渲染之前， Compilation 实例会调用 `Compilation.createHash()` 方法来生成这次构建的 `Hash`，在 Webpack 的配置中，我们可以在 `output.filename` 中配置 `[hash]` 占位符，最终就会替换成这个 `Hash`。同样，
+
+`Compilation.createHash()` 也会为每一个 chunk 也创建一个 Hash，对应 `[chunkhash]` 占位符。
+
+```javascript
+// webpack 4.41.5
+// lib/Compilation.js
+seal(callback) {
+  this.hooks.seal.call();
+  // ...
+  
+  this.hooks.beforeHash.call();
+  this.createHash();
+  this.hooks.afterHash.call();
+  
+  // ...
+}
+```
+
+当 `hash` 创建完成之后，下一步就会遍历 `Compilation` 对象的 `chunks` 属性，来渲染每一个 chunk。如果一个chunk 是入口 `(entry) chunk`，那么就会调用 `MainTemplate` 实例的 `render` 方法，否则调用 `ChunkTemplate` 的 `render` 方法：
+
+```javascript
+// webpack 4.41.5
+// lib/Compilation.js
+createHash() {
+  // ...
+  for (let i = 0; i < chunks.length; i++) {
+    const chunk = chunks[i];
+    const chunkHash = createHash(hashFunction);
+    try {
+      if (outputOptions.hashSalt) {
+        chunkHash.update(outputOptions.hashSalt);
+      }
+      chunk.updateHash(chunkHash);
+      // 根据类型选择模板
+      const template = chunk.hasRuntime()
+      ? this.mainTemplate
+      : this.chunkTemplate;
+      template.updateHashForChunk(
+        chunkHash,
+        chunk,
+        this.moduleTemplates.javascript,
+        this.dependencyTemplates
+      );
+      this.hooks.chunkHash.call(chunk, chunkHash);
+      chunk.hash = /** @type {string} */ (chunkHash.digest(hashDigest));
+      hash.update(chunk.hash);
+      chunk.renderedHash = chunk.hash.substr(0, hashDigestLength);
+      this.hooks.contentHash.call(chunk);
+    } catch (err) {
+      this.errors.push(new ChunkRenderError(chunk, "", err));
+    }
+  }
+  // ...
+}
+```
+
+当每个 `chunk` 的源码生成后，就会通过 `Compilation.emitAsset` 这个方法，添加到 `Compilation` 的 `assets` 属性中去
+
+```javascript
+// webpack 4.41.5
+// lib/Compilation.js
+emitAsset(file, source, assetInfo = {}) {
+  if (this.assets[file]) {
+    if (!isSourceEqual(this.assets[file], source)) {
+      // TODO webpack 5: make this an error instead
+      this.warnings.push(
+        new WebpackError(
+          `Conflict: Multiple assets emit different content to the same filename ${file}`
+        )
+      );
+      this.assets[file] = source;
+      this.assetsInfo.set(file, assetInfo);
+      return;
+    }
+    const oldInfo = this.assetsInfo.get(file);
+    this.assetsInfo.set(file, Object.assign({}, oldInfo, assetInfo));
+    return;
+  }
+  this.assets[file] = source;
+  this.assetsInfo.set(file, assetInfo);
+}
+```
+
+当所有的 `chunk` 都渲染完成之后， `assets` 就是最终更要生成的文件列表。
+
+完成上面的操作之后，`Compilation` 的 `seal` 方法结束，进入到 `compiler` 的 `emitAssets` 方法，`Compilation` 工作到此也全部结束了，这也意味着一次构建过程已经结束，接下来 `Webpack` 会直接遍历 `compilation.assets` 生成所有文件，然后触发任务点 `done`，结束构建流程。
+
+&nbsp;
+
+## 验证
+
+我们可以遍历 `comipler.hooks`，使用 `hook.tap` 的方法添加回调函数，将 `hookName` 打印出来，前面我们有提到过相关方法，但是 `hooks` 会打印不全，前面是直接从 `run()` 方法时候开始的，缺少了环境变量和参数处理的流程，的比如 `environment`、`afterEnvironment` 会打印不出来。
+
+为了显示全，我们可以在 `lib/Compiler.js` 中加入的 `constructor` 函数中加入如下代码：
+
+```javascript
+// webpack 4.41.5
+// lib/Compiler.js
+constructor() {
+  // ...
+  Object.keys(this.hooks).forEach(hookName => {
+
+    if (this.hooks[hookName].tap) {
+      this.hooks[hookName].tap('anyString', () => {
+        console.log(`compiler -> ${hookName}`);
+      });
+    }
+  });
+}
+```
+
+![](./img/process5.png)
+
+可以看到相比较之前多出了下面几个过程：
+
+```javascript
+ environment
+ afterEnvironment
+ entryOption
+ afterPlugins
+ afterResolvers
+```
+
+接着我们可以使用同样的方法给 `Compilation` 添加上同样的方法，这样就可以看到 `webpack` 构建的整个钩子流程了：
+
+```javascript
+// webpack 4.41.5
+// lib/Compilation.js
+constructor() {
+  // ...
+  Object.keys(this.hooks).forEach(hookName => {
+
+    if (this.hooks[hookName].tap) {
+      this.hooks[hookName].tap('anyString', () => {
+        console.log(`	Compilation -> ${hookName}`);
+      });
+    }
+  });
+}
+```
+
+这样我们就可以看到所有的 `hooks` 了：
+
+![](./img/process6.png)
+
+![](./img/process7.png)
+
+![](./img/process8.png)
+
+![](./img/process9.png)
+
+接着我们可以运行 `npm run dev`，来更好的理解一下 `Compiler` 和 `Compilation` 的区别，这个时候 `webpack` 是处于 `watch` 模式，他与普通模式的流程还是有一些区别的，如下：
+
+```javascript
+// 普通模式
+compiler -> afterResolvers
+compiler -> beforeRun (不同)
+compiler -> run (不同)
+compiler ->	normalModuleFactory
+
+// watch 模式
+compiler ->	afterResolvers
+compiler ->	watchRun (不同)
+compiler ->	normalModuleFactory
+```
+
+我们修改一些入口文件 `src/index.js`，可以发现 `compiler` 只是从 `invaile -> watchRun` 开始，没有重新走流程，但是 `Compilation` 却走完了一个流程，在这里我们可以得出：**`compiler` 是管理整个生命周期的，而 `compilation` 是每次编译触发都会重新生成一次的。**
+
+&nbsp;
+
+## 总结
+
+这一节我们主要分析了 `webpack` 的构建流程，我们在来回顾一波 `webpack` 的流程：
+
+1. 初始化参数：包括从配置文件和 `shell` 中读取和合并参数，然后得出最终参数。
+
+2. 使用上一步得到的参数实例化一个 `Compiler` 类，注册所有的插件，给对应的 `Webpack` 构建生命周期绑定`Hook`。
+
+3. 开始编译：执行 `Compiler` 类的 `run` 方法开始执行编译。
+
+4. `compiler.run` 方法调用 `compiler.compile`，在 `compile` 内实例化一个 `Compilation` 类，`Compilation` 是做构建打包的事情，主要事情如下：
+   * 查找入口：根据 `entry` 配置，找出全部的入口文件
+   * 编译模块：根据文件类型和 `loader` 配置，使用对应 `loader` 对文件进行转换处理
+   * 解析文件的 `AST` 语法树
+   * 找出文件依赖关系（`arcon`）
+   * 递归编译依赖的模块
+5. 递归完后得到每个文件的最终结果，根据 `entry` 配置生成代码块 `chunk`
+6. 输出所有 `chunk` 到对应的 `output` 路径，打包完成。
+
+**举例流程可参考下图**：
+
+![](./img/process10.png)
 
 
 
-
-
+这篇文章具体是参考了 [慕课网专栏——Webpack 从零入门到工程化实战](http://www.imooc.com/read/29) 中的 **`webpack` 构建流程** 这一章，讲的贼仔细，墙裂推荐。
 
 &nbsp;
 
@@ -439,5 +761,5 @@ buildModule(module, optional, origin, dependencies, thisCallback) {
 
 示例代码可以看这里，具体是在 `node_modules` 中 `webpack` 文件：
 
-- [示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter4/tapable-demo)
+- [示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter4/process-demo)
 

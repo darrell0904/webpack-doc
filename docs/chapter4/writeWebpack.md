@@ -4,7 +4,226 @@
 
 
 
-## 写点代码
+## 第一种方式
+
+第一种我们以之前讲到的 `webpack` 流程的形式，来写一个简易的 `webpack`，我们新建一个文件夹 `class-webpack-demo`，并创建：
+
+* `lib`：webpack 核心代码文件夹，在其中我们新建 `compiler.js`（编译文件），`index.js`（入口文件），`parser.js`（工具函数，包括 生成 `ast`、寻找依赖、将 `ast` 转化为源代码）
+* `src`：业务代码文件夹
+* `simplepack.config.js`：webpack 配置文件
+
+### 完善 `src` 代码：
+
+我们新建 `index.js` 和 `greeting.js` 两个文件，主要是在浏览器上打印出一行文字 `Hello Darrell`：
+
+```javascript
+// index.js
+
+import { greeting } from './greeting.js';
+document.write(greeting('Darrell'));
+
+// greeting.js
+
+export const greeting = (name) => {
+  return 'hello' + name;
+}
+```
+
+
+
+### 完善 `lib` 代码
+
+首先我们先来回顾一下之前讲过的 `webpack` 流程，`webpack` 会在读取号配置文件后，运行 `run` 方法，并通过配置的入口文件，循环遍历出从入口文件开始所用到的所有依赖，并进行模块的打包，打包完成之后，`webpack` 会将编译构建好的文件输出到磁盘上，完成打包。
+
+在这里我们简单的将 `webpack` 打包分为三步：
+
+* 处理入口文件，并执行 `run` 方法，开始构建
+* 从入口文件开始，循环遍历所有依赖，进行打包，并放到 `modules` 属性中
+* 输出构建好的文件
+
+#### 配置文件
+
+我们配置文件就简单一点，就只设定一个入口和出口。
+
+```javascript
+// simplepack.config.js
+'use strict';
+const path = require('path');
+
+module.exports = {
+  entry: path.join(__dirname, './src/index.js'),
+  output: {
+    path: path.join(__dirname, './dist'),
+    filename: 'main.js'
+  }
+};
+```
+
+#### 主文件
+
+##### 开始构建
+
+首先我们先来完善 `index.js`，这个是 `webpack` 的入口文件，在这里我们可以导入 `compiler` 和配置参数，并通过运行 `compiler.run()` 方法开始构建
+
+```javascript
+// index.js
+
+const Compiler = require('./compiler');
+const options = require('../simplepack.config');
+
+new Compiler(options).run();
+```
+
+接着就是最主要的 `compiler` 编译器的实现，通过上面的分析，我们需要定义一个 `compiler` 类，接收配置文件的配置参数，并且在 `compiler` 类上拥有 `run`（开始构建）、`buildModule`（打包模块）、`emitFiles`（输出打包文件）三个方法，具体如下：
+
+```javascript
+// compiler.js
+const fs = require('fs');
+const path = require('path');
+
+module.exports = class Compiler {
+  constructor(options) {
+    const { entry, output } = options;
+    this.entry = entry;
+    this.output = output;
+    // 用来放置处理后的模块
+    this.modules = [];
+  }
+  // 开始构建
+  run() {}
+
+  // 打包模块
+  // filename：文件名称
+  // isEntry：是否是入口文件
+  buildModule(filename, isEntry) {}
+
+  // 输出文件
+  emitFiles() {}
+}
+```
+
+在 `run` 方法中，我们需要对入口文件进行打包，获取他的依赖，并对其依赖进行打包，直到所有的依赖都已经被打包完为止。
+
+```javascript
+// compiler.js
+// ...
+run() {
+  // 打包入口文件
+  const entryModule = this.buildModule(this.entry, true);
+
+  // 将打包好的 module 塞入到 modules 中
+  this.modules.push(entryModule);
+  
+  // 遍历 modules，并将他们的依赖一次进行打包
+  this.modules.map((_module) => {
+    _module.dependencies.map((dependency) => {
+      this.modules.push(this.buildModule(dependency));
+    })
+  });
+
+  // 输出构建结果
+  this.emitFiles();
+}
+```
+
+##### 构建文件
+
+接着我们就来编写 `buildModule` 方法，在这个方法中，我们会对输入的文件进行打包，传入 `isEntry` 这个参数的原因是因为，除了入口文件之外，其他文件的依赖都是相对路径，我们需要将这些路径转化为相应的绝对路径之后，才能对其进行打包。
+
+构建过程中我们会将代码转成 `ast`，并分析其依赖，最终在将处理完的代码转回原来的代码（`source`）,这就完成了对一个文件的构建：
+
+```javascript
+// compiler.js
+// ...
+buildModule(filename, isEntry) {
+  let ast;
+  // 判断是否是入口文件
+  // 是就直接使用 filename，其本身就是绝对路径
+  // 不是就是拼成绝对路径
+  if (isEntry) {
+    ast = getAST(filename);
+  } else {
+    let absolutePath = path.join(process.cwd(), './src', filename);
+    ast = getAST(absolutePath);
+  }
+
+  // 输出结果
+  return {
+    filename, // 文件名称
+    dependencies: getDependencis(ast), // 依赖图
+    transformCode: transform(ast), // 源码
+  }
+}
+```
+
+这里面使用了三个方法，我写在了 `parser.js` 中：
+
+* `getAST`：通过 `babylon` 获取代码 `AST`，关于 `AST` 的知识，大家可以参考 [AST抽象语法树——最基础的javascript重点知识，99%的人根本不了解](https://segmentfault.com/a/1190000016231512)
+* `getDependencis`：通过 `babel-traverse` 获取文件的依赖列表
+* `transform`：通过 `babel-core` 将 `AST` 转化为源码
+
+##### 输出文件
+
+最后就是输出文件了，在这之前，我们回顾一下 `webpack` 的模块机制。
+
+![](./img/webpack20.png)
+
+通过上图我们可以看到：
+
+* 通过 `webpack` 打包出来的是一个 `IIFE`（匿名闭包）
+* 接受参数是 `modules`，它是一个数组，每一项是一个模块初始化函数
+* `__webpack_require` 用来加载模块，返回 `modules.exports`
+* 通过 `__webpack_require(0)` 加载第一个模块，来启动程序。
+
+于是我们可以来编写 `emitFiles` 方法：
+
+```javascript
+// compiler.js
+// ...
+emitFiles() {
+  const outputPath = path.join(this.output.path, this.output.filename);
+  let modules = '';
+  // 将打包好的模块以键值对的形式，拼接起来
+  // 跟 webpack 一样传入
+  // require：加载函数
+  // module：要导出的 return 的 module
+  // exports：module.exports
+  this.modules.map((_module) => {
+    modules += `'${ _module.filename }': function (require, module, exports) { ${ _module.transformCode } },`
+  });
+
+  // 拼接导出文件 IIFE
+  const bundle = `
+		(function(modules) {
+			function require(fileName) {
+				const fn = modules[fileName];
+				const module = { exports : {} };
+
+				fn(require, module, module.exports);
+    		return module.exports;
+			}
+			require('${this.entry}');
+		})({${modules}})
+	`;
+  
+  // 输出文件到 output 文件夹
+  fs.writeFileSync(outputPath, bundle, 'utf-8');
+}
+```
+
+打包出来 `main.js` 文件如下图所示：
+
+![](./img/webpack21.png)
+
+我们在 `dist` 目录下新增 `index.html`，并引入打包好的 `main.js`，打开 `index.html`，我们可以看到输出了 `helloDarrell`。
+
+
+
+&nbsp;
+
+## 第二种方式
+
+### 写点代码
 
 我们新建一个 `src` 目录，并创建 `index.js`、`message.js`、`word.js` 三个文件，并在根目录创建一个打包 `bundle.js` 文件，我们在 `bundle.js`  中做一些 `webpack` 要做的事情
 
@@ -26,13 +245,13 @@ export const word = 'hello';
 
 &nbsp;
 
-## 模块分析
+### 模块分析
 
 打包的第一步我们需要去读取项目的入口文件，并且去分析其中的代码。
 
 我们从模块分析先开始讲起，首先我们新建一个 `moduleAnalyser` 的方法，此方法接受一个参数，就是要分析的文件的路径，帮助我们分析文件的信息。
 
-### 读取文件信息
+#### 读取文件信息
 
 我们通过 `Node` 的 `fs` 模块读取文件内容：
 
@@ -79,7 +298,7 @@ npm install cli-highlight -g
 
 
 
-### 获得文件依赖
+#### 获得文件依赖
 
 获得文件信息之后，我们需要去获得这个文件中所用到的依赖，
 
@@ -200,7 +419,7 @@ moduleAnalyser('./src/index.js')
 
 &nbsp;
 
-### 编译 `es6` 代码
+#### 编译 `es6` 代码
 
 因为我们的代码是 `es6` 的代码，他在浏览器中肯定不能执行，所以我们需要打包编译一下代码，将其转化为浏览器能运行的代码。
 
@@ -250,7 +469,7 @@ moduleAnalyser('./src/index.js')
 
 
 
-### 导出
+#### 导出
 
 最后我们将分析的文件名、依赖、编译好的代码导出去就完成了：
 
@@ -294,7 +513,7 @@ const moduleInfo = moduleAnalyser('./src/index.js')
 
 &nbsp;
 
-## 依赖图谱
+### 依赖图谱
 
 英文名 `Dependencies Graph`，即从入口文件开始，对所有应用到的文件做分析，最后把所有文件的依赖信息都给分析出来。
 
@@ -386,7 +605,7 @@ const graphInfo = makeDependenciesGraph('./src/index.js');
 
 &nbsp;
 
-### 导出
+#### 导出
 
 最后我们将结果导出：
 
@@ -430,7 +649,7 @@ console.log('---graphInfo---\n', graphInfo);
 
 &nbsp;
 
-## 生成代码
+### 生成代码
 
 接下来我们要做的就是通过 **依赖图谱** 来生成对应的代码了。
 
@@ -619,15 +838,11 @@ console.log(code)
 
 我们可以看到页面中打印出了 `say world`，以及每一个 `module` 对应的 `exports` 的值。
 
-
-
 &nbsp;
 
 ## 总结
 
 到此我们便完成了一个简单的 `webpack` 的编写，虽然说是一个简单的例子，但是从中也涉及到蛮多的知识点的，我们也能从中对 `webpack` 的打包流程有一定的了解。
-
-
 
 &nbsp;
 
@@ -635,7 +850,10 @@ console.log(code)
 
 - [官方叫你手写 webpack](https://webpack.js.org/api/compiler-hooks/)
 - [module 和 exports 的实现](https://www.jianshu.com/p/011f2a90291d)
+- [require时，exports和module.exports的区别你真的懂吗？](http://www.imooc.com/article/291145)
 - [Node.js 模块(module)](http://nodejs.cn/api/modules.html#modules_modules)
+- [AST抽象语法树——最基础的javascript重点知识，99%的人根本不了解](https://segmentfault.com/a/1190000016231512)
+- [AST Parser](https://esprima.org/demo/parse.html)
 
 &nbsp;
 
@@ -643,5 +861,6 @@ console.log(code)
 
 示例代码可以看这里：
 
-- [webpack  示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter4/webpack-demo)
+- [第一种方式  示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter4/class-webpack-demo)
+- [第二种方式  示例代码](https://github.com/darrell0904/webpack-study-demo/tree/master/chapter4/webpack-demo)
 

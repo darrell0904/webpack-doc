@@ -12,8 +12,6 @@ npm run dev
 ```
 
 
-
-
 &nbsp;
 
 ## 写文档的原因
@@ -177,6 +175,12 @@ sudo vi /etc/hosts
 
 &nbsp;
 
+### 一些实战例子
+
+* [一些实战例子](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter9/README.md)
+
+&nbsp;
+
 ### 一些补充
 
 * [代码部署](https://github.com/darrell0904/webpack-doc/blob/master/docs/chapter8/deploy.md)
@@ -189,7 +193,7 @@ sudo vi /etc/hosts
 
 ## 文档地址
 
-文档地址：[webpack-doc 学习文档](https://webpack-doc-20200228.now.sh/)
+文档地址：[webpack-doc 学习文档](https://webpack-doc-20200329.now.sh/)
 
 
 &nbsp;

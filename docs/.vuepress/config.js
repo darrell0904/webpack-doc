@@ -119,6 +119,13 @@ module.exports = {
         ]
       },
       {
+        title: '实战例子',
+        collapsable: true,
+        children: [
+          ['chapter9/', '一些实战例子'],
+        ]
+      },
+      {
         title: '一些补充',
         collapsable: true,
         children: [

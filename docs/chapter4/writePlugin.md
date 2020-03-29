@@ -6,8 +6,6 @@
 
 而 `plugin` 我们则要编写一个类，这个类中在 `webpack` 的具体生命周期中做一些事情。 原理是通过事件驱动的时候
 
-
-
 &nbsp;
 
 ## `loader` 和 `plugin` 区别
@@ -29,6 +27,18 @@
 - 指定一个绑定到 `webpack` 自身的 [事件钩子](https://www.webpackjs.com/api/compiler-hooks/)。
 - 处理 `webpack` 内部实例的特定数据。
 - 功能完成后调用 `webpack` 提供的回调。
+
+```javascript
+class MyPlugin {
+  apply(compiler) {
+    compiler.hooks.done.tap(' MyPlugin', (stats) => {
+      console.log('Hello World!');
+    })
+  }
+}
+
+module.exports = MyPlugin;
+```
 
 
 
@@ -57,8 +67,6 @@ module.exports = CopyrightWebpackPlugin;
 
 上面是 `webpack` 插件的一个基本格式。
 
-
-
 &nbsp;
 
 ### 使用
@@ -66,12 +74,12 @@ module.exports = CopyrightWebpackPlugin;
 我们在 `webpack.common.js` 中使用此插件：
 
 ```javascript
-...
+// ...
 
 const CopyRightWebpackPlugin = require('../plugins/copyright-webpack-plugin');
 
 const commonConfig = {
-  ...
+  // ...
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -79,17 +87,17 @@ const commonConfig = {
     }),
     new CopyRightWebpackPlugin()
   ],
-  ...
+  // ...
 }
 
-...
+// ...
 ```
 
 我们打包一下文件 `npm run dev`，可以看到控制台输出 `插件使用了` 文字：
 
 ![](./img/plugins1.png)
 
-
+&nbsp;
 
 ### 完善插件内容
 
@@ -118,8 +126,6 @@ class CopyrightWebpackPlugin {
 module.exports = CopyrightWebpackPlugin;
 ```
 
-
-
 * `hooks` 的调用通过 `compiler.hooks.someHook.tap(...)` 进行调用，不过这个取决于钩子的类型，如果是同步的钩子使用 `tab`，异步的钩子使用 `tapAsync`，`emit` 这个钩子是异步的，所以我们使用 `tabAsync`
 * 钩子函数接受两个参数，一个是插件名，一个是函数，函数接受两个参数，一个是 [`compilation`](https://www.webpackjs.com/api/compilation-hooks/) 代表这次打包相关的内容，`cb` 代表回调函数。
 * `compilation` 存放了这次打包的所有东西，`compilation.assets` 存放了这次打包出来的所有文件信息，我们想要在打包完成之后在插入一个 `txt` 文件，实际上就是往 `assets` 中再加入一个 `copyright.txt` 文件，其中 `source` 属性是这个文件的内容，`size` 是这个文件的长度。
@@ -135,8 +141,6 @@ module.exports = CopyrightWebpackPlugin;
 ![](./img/plugins4.png)
 
 到这里我们一个简单的在打包完成之后生成一个 `copyright.txt` 文件就完成了。
-
-
 
 &nbsp;
 
@@ -200,8 +204,6 @@ compiler.hooks.failed.tap('CopyrightWebpackPlugin', (error) => {
 ![](./img/plugins8.png)
 
 更多的钩子参大家可以在用到的时候再去参考 [webpack 官网 Compiler Hooks](https://webpack.js.org/api/compiler-hooks/)。
-
-
 
 &nbsp;
 
@@ -271,13 +273,134 @@ class CopyrightWebpackPlugin {
 
 如何对代码进行调试，对每一个程序员都是一项必备的技能，大家还是要掌握起来。
 
-
-
 &nbsp;
 
 ## 更多插件
 
+### 一个压缩资源为 `zip` 包的插件
 
+这个插件的作用是生成一个 **构建的文件** 的 `zip` 包，通过 `Compilation` 进行文件写入，可以将生成好的 `zip` 资源包设置到 `compilation.assets` 对象上。
+
+#### 前置知识
+
+我们需要 [`jszip`](https://www.npmjs.com/package/jszip) 这个库，他能帮我们将文件压缩为 `zip` 包，使用例子如下：
+
+```javascript
+var zip = new JSZip();
+
+// 添加 txt 文件
+zip.file("Hello.txt", "Hello World\n");
+
+// 添加 img 文件夹
+var img = zip.folder("images");
+img.file("smile.gif", imgData, {base64: true});
+
+// 生成 zip 包
+zip.generateAsync({type:"blob"}).then(function(content) {
+  // see FileSaver.js
+  saveAs(content, "example.zip");
+}); 
+
+/*
+Results in a zip containing
+Hello.txt
+images/
+    smile.gif
+*/
+```
+
+#### 写点代码
+
+我们这里面要用到的 `hooks` 是 `emit`，就是生成文件的阶段，我们可以读取 `compilation.assets` 对象的值，并将我们生成的 `zip` 资源包设置到这个对象上。
+
+同时在文件写入的时候我们需要使用 [`webpack-sources`](https://github.com/webpack/webpack-sources)，它是一个 `Webpack` 的源代码处理类。更多可参考 [webpack-sources, web-service的源代码处理类](https://www.kutu66.com//GitHub/article_136779)
+
+```javascript
+// zip-plugin.js
+
+// 引入 jszip
+const JSZip = require('jszip');
+const path = require('path');
+// 引入 RawSource，帮助我们写入文件
+const RawSource = require('webpack-sources').RawSource;
+// 实例化一个 zip
+const zip = new JSZip();
+
+module.exports = class ZipPlugin {
+  // 接收插件配置参数
+  constructor(options) {
+    this.options = options;
+  }
+
+  // 定义 apply 方法
+  apply(compiler) {
+    // 在生成的 emit hooks 上 注册相应的时间
+    compiler.hooks.emit.tapAsync('ZipPlugin', (compilation, callback) => {
+      // 根据 配置名，给 zip 命名
+      const folder = zip.folder(this.options.filename);
+
+      // 循环遍历 assets 上的文件，
+      // 并添加到 zip 中去
+      for (let filename in compilation.assets) {
+        const source = compilation.assets[filename].source();
+        folder.file(filename, source);
+      }
+
+      // 开始生成 zip
+      zip.generateAsync({
+        type: 'nodebuffer'
+      }).then((content) => {
+        // 得到 zip 包的绝对路径
+        const outputPath = path.join(
+          compilation.options.output.path, 
+          this.options.filename + '.zip'
+        );
+        
+        // 得到 zip 包的相对路径
+        const outputRelativePath = path.relative(
+          compilation.options.output.path,
+          outputPath
+        );
+
+        // 开始往 compilation.assets 文件上写入文件 
+        compilation.assets[outputRelativePath] = new RawSource(content);
+        
+        // 执行回调
+        callback();
+      });
+    });
+  }
+}
+```
+
+接着在 `webpack.common.js` 中配置插件：
+
+```javascript
+// ...
+const CopyRightWebpackPlugin = require('../plugins/copyright-webpack-plugin');
+const ZipPlugin = require('../plugins/zip-plugins');
+
+const commonConfig = {
+  // ...
+  plugins: [
+    // ...
+    new CopyRightWebpackPlugin(),
+    new ZipPlugin({
+      filename: 'offline'
+    }),
+  ],
+  // ...
+}
+// ...
+```
+
+最后我们运行 `npm run bundle`，可以看到在 `dist` 目录下生成了相应的 `offline.zip` 包：
+
+![](./img/plugins16.png)
+
+解压后可以发现，`offline.zip` 包中就是此次打包生成的结果文件：
+
+![](./img/plugins17.png)
 
 
 

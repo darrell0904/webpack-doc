@@ -16,7 +16,7 @@ npm run dev
 
 ## 写文档的原因
 
-因为现在对于 `webpack` 的配置了解的不够全名，比较碎片话，同时有些很新的概念一直都没有应用。
+因为现在对于 `webpack` 的配置了解的不够全面，比较碎片话，同时有些很新的概念一直都没有应用。
 
 这是我写这个文档原因，让自己更加系统全面的掌握 `webpack` ，毕竟 `webpack 5.0` 快要来了。
 
@@ -72,6 +72,8 @@ sudo vi /etc/hosts
 &nbsp;
 
 ## 项目截图
+
+整个文档是用 [vuepress ](https://www.vuepress.cn/) 搞得，截图如下：
 
 ![](./images/webpack1.png)
 

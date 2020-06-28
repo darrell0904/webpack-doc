@@ -23,7 +23,7 @@ module.exports = {
     // 对生成的库文件进行分析，生成库文件与业务文件的映射关系，将结果放在 mainfest.json 文件中
     new webpack.DllPlugin({
       name: '[name]', // 和上面的 library 输出的名字要相同
-      path: path.resolve(__dirname, '../dll/[name].manifest.json'),
+      path: path.resolve(__dirname, '../dll/[name].mainfest.json'),
     })
   ]
 }
@@ -86,10 +86,10 @@ const commonConfig = {
       filepath: path.resolve(__dirname, '../dll/react.dll.js')
     }),
     new webpack.DllReferencePlugin({
-      manifest: require(path.resolve(__dirname, '../dll/vendors.dll.mainfest.json'))
+      manifest: require(path.resolve(__dirname, '../dll/vendors.mainfest.json'))
     }),
     new webpack.DllReferencePlugin({
-      manifest: require(path.resolve(__dirname, '../dll/react.dll.mainfest.json'))
+      manifest: require(path.resolve(__dirname, '../dll/react.mainfest.json'))
     }),
   ],
   ...

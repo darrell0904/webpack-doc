@@ -4,8 +4,6 @@
 
 但是并没有单独的打包出一个 `css` 文件，今天我们来讲一下讲如何单独打包出 `css` 文件。
 
-
-
 在 `Webpack 4` 之前，我们使用 [extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) 插件来提取项目中引入的样式文件，打包到一个单独的文件中。从 `Webpack 4` 开始，这个插件就过时了，需要使用 [MiniCssExtractPlugin](https://webpack.js.org/plugins/mini-css-extract-plugin/)。
 
 &nbsp;
